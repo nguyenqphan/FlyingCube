@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{86FC4301-F2B5-071C-47F7-D9874C5D4E3A}") = "FlyingCube", "Assembly-CSharp.csproj", "{518E6760-FEA6-A85E-42B7-B9E22B8B0E49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{518E6760-FEA6-A85E-42B7-B9E22B8B0E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{518E6760-FEA6-A85E-42B7-B9E22B8B0E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{518E6760-FEA6-A85E-42B7-B9E22B8B0E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{518E6760-FEA6-A85E-42B7-B9E22B8B0E49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
