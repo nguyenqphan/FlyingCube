@@ -15,6 +15,14 @@ public class Spawner : MonoBehaviour {
 	private List<Transform> cubeTransList;
 
 	private int cubeAmount;
+	private int InitialCubeNum;
+
+	private int xPos;
+	private int yPos;
+	private Vector3 currCubePos()
+	{
+		return new Vector3(xPos, yPos, 0);	
+	}
 
 	void Awake()
 	{
@@ -24,6 +32,7 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cubeAmount = 30;
+		InitialCubeNum = 30;
 
 		cubeList = new List<GameObject>();
 
@@ -40,14 +49,59 @@ public class Spawner : MonoBehaviour {
 			cubeList.Add(newCube);
 
 			cubeTrans = newCube.GetComponent<Transform>();
-			
-			newCube.SetActive(false);
-
-			cubeList.Add(newCube);
-
-			cubeTrans = newCube.GetComponent<Transform>();
 			cubeTransList.Add(cubeTrans);
 
 		}
+	}
+
+	void Update()
+	{
+		if(Input.GetButtonDown("Fire1"))
+		{
+			Debug.Log("Fire1");
+			StartCoroutine(LayoutCube());
+		}
+	}
+
+	IEnumerator SpawnCube(Vector3 spawnPos )
+	{
+		for(int i = 0; i < cubeList.Count; i++)
+		{
+			if(!cubeList[i].activeInHierarchy)
+			{
+				cubeTransList[i].position = spawnPos;
+				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+
+				cubeList[i].SetActive(true);
+				break;
+			}
+		}
+
+		yield return 0;
+	}
+
+	IEnumerator LayoutCube()
+	{
+		for(int i = 0; i < InitialCubeNum; i += 2)
+		{
+			
+			cubeTransList[i].position = new Vector3(xPos, yPos + 15f, 0f);
+			cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+
+			cubeList[i].SetActive(true);
+
+			cubeTransList[i + 1].position =  new Vector3(xPos, yPos - 15f, 0f);
+			cubeTransList[i + 1].rotation = Quaternion.Euler(0f,0f,0f);
+
+			cubeList[i + 1].SetActive(true);
+			xPos++;
+			yield return 0;
+		}
+	}
+
+
+	void FindCube()
+	{
+		
 	}
 }
