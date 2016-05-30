@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cubeAmount = 30;
+		cubeAmount = 40;
 		InitialCubeNum = 30;
 
 		cubeList = new List<GameObject>();
@@ -52,27 +52,41 @@ public class Spawner : MonoBehaviour {
 			cubeTransList.Add(cubeTrans);
 
 		}
+
+		StartCoroutine(LayoutCube());
 	}
 
 	void Update()
 	{
 		if(Input.GetButtonDown("Fire1"))
 		{
-			Debug.Log("Fire1");
-			StartCoroutine(LayoutCube());
+//			Debug.Log("Fire1");
+//			StartCoroutine(LayoutCube());
 		}
 	}
 
-	IEnumerator SpawnCube(Vector3 spawnPos )
+	public void StartSpawnCube(float yPosision)
+	{
+		StartCoroutine(SpawnCube(yPosision));
+	}
+
+	IEnumerator SpawnCube(float yPosition )
 	{
 		for(int i = 0; i < cubeList.Count; i++)
 		{
 			if(!cubeList[i].activeInHierarchy)
 			{
-				cubeTransList[i].position = spawnPos;
+				if(yPosition > 0)
+
+					cubeTransList[i].position = new Vector3(xPos, yPos +15f, 0f);
+				else
+					cubeTransList[i].position = new Vector3(xPos, yPos -15f, 0f);
+					
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
 				cubeList[i].SetActive(true);
+
+				xPos++;
 				break;
 			}
 		}
