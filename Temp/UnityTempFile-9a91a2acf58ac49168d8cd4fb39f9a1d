@@ -79,9 +79,10 @@
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
 -define:UNITY_PRO_LICENSE
+'Assets/__Scripts/CameraMove.cs'
+'Assets/__Scripts/Creator.cs'
 'Assets/__Scripts/Destroyer.cs'
 'Assets/__Scripts/Player.cs'
-'Assets/__Scripts/PlayerControl.cs'
 'Assets/__Scripts/Spawner.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Xml.Linq.dll'

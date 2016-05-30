@@ -16,9 +16,12 @@ public class Spawner : MonoBehaviour {
 
 	private int cubeAmount;
 	private int InitialCubeNum;
+	private bool isSecond;
 
 	private int xPos;
 	private int yPos;
+
+
 	private Vector3 currCubePos()
 	{
 		return new Vector3(xPos, yPos, 0);	
@@ -33,6 +36,7 @@ public class Spawner : MonoBehaviour {
 	void Start () {
 		cubeAmount = 40;
 		InitialCubeNum = 30;
+		isSecond = true;
 
 		cubeList = new List<GameObject>();
 
@@ -65,34 +69,43 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
-	public void StartSpawnCube(float yPosision)
+	public void StartSpawnCube()
 	{
-		StartCoroutine(SpawnCube(yPosision));
+		StartCoroutine(SpawnCube());
 	}
 
-	IEnumerator SpawnCube(float yPosition )
+	private IEnumerator SpawnCube( )
 	{
 		for(int i = 0; i < cubeList.Count; i++)
 		{
 			if(!cubeList[i].activeInHierarchy)
 			{
-				if(yPosition > 0)
-
-					cubeTransList[i].position = new Vector3(xPos, yPos +15f, 0f);
-				else
-					cubeTransList[i].position = new Vector3(xPos, yPos -15f, 0f);
+				
+				cubeTransList[i].position = new Vector3(xPos, isSecond? 15f: -15f, 0f);
 					
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
 				cubeList[i].SetActive(true);
 
-				xPos++;
-				break;
+				isSecond = !isSecond;
+				if(isSecond){
+					xPos++;
+					break;
+				}
+					
+
 			}
 		}
 
 		yield return 0;
 	}
+
+	IEnumerator MoveCube(Transform currCubeTran)
+	{
+		yield return 0;
+	}
+
+
 
 	IEnumerator LayoutCube()
 	{

@@ -3,11 +3,18 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public Transform playerTrans;
-	public Rigidbody playerRigid;
+	private Transform playerTrans;
+	private Rigidbody playerRigid;
 
 	private bool tap;
 	// Use this for initialization
+
+	void Awake()
+	{
+		playerTrans = GetComponent<Transform>();
+		playerRigid = GetComponent<Rigidbody>();
+	}
+
 	void Start () {
 		playerRigid.useGravity = false;
 	}
@@ -33,6 +40,12 @@ public class Player : MonoBehaviour {
 	}
 
 
+	void OnCollisionEnter()
+	{
+		this.gameObject.SetActive(false);
+	}
+
+
 	void Flap()
 	{
 		playerRigid.velocity = Vector3.zero;
@@ -40,5 +53,4 @@ public class Player : MonoBehaviour {
 	}
 
 
-		
 }

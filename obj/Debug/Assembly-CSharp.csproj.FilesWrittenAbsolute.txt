@@ -1,0 +1,17 @@
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/obj/Debug/Assembly-CSharp.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/UnityEngine.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/UnityEditor.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Mono.Cecil.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Unity.DataContract.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/nguyenphan/Documents/_GameProjects/FlyingCube/Temp/bin/Debug/Mono.Cecil.Mdb.dll

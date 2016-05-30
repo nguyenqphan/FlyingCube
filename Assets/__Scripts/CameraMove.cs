@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControl : MonoBehaviour {
+public class CameraMove : MonoBehaviour {
 
-	public Transform thisTransform;
+	private Transform thisTransform;
 	private bool isPlaying = true;
-	private  float speed = 3f;
+	private  float speed = 5f;
+
+	void Awake()
+	{
+		thisTransform = GetComponent<Transform>();
+	}
 
 	// Use this for initialization
 	void Start () {
