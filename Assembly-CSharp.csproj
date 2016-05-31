@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\__Scripts\CameraMove.cs" />
+     <Compile Include="Assets\__Scripts\Cube.cs" />
      <Compile Include="Assets\__Scripts\Destroyer.cs" />
      <Compile Include="Assets\__Scripts\Player.cs" />
      <Compile Include="Assets\__Scripts\Spawner.cs" />

@@ -8,11 +8,16 @@ public class Spawner : MonoBehaviour {
 
 	public GameObject cube;
 
+	private Cube cubeComponent;
 	private Transform cubeTrans;
 
 	private List<GameObject> cubeList;
 
 	private List<Transform> cubeTransList;
+
+	private List<Cube> cubeComponentList;
+
+
 
 	private int cubeAmount;
 	private int InitialCubeNum;
@@ -20,7 +25,6 @@ public class Spawner : MonoBehaviour {
 
 	private int xPos;
 	private int yPos;
-
 
 	private Vector3 currCubePos()
 	{
@@ -35,12 +39,15 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cubeAmount = 40;
-		InitialCubeNum = 30;
+		InitialCubeNum = 32;
 		isSecond = true;
+
 
 		cubeList = new List<GameObject>();
 
 		cubeTransList = new List<Transform>();
+
+		cubeComponentList = new List<Cube>();
 
 		for(int i = 0; i < cubeAmount; i++)
 		{
@@ -54,6 +61,9 @@ public class Spawner : MonoBehaviour {
 
 			cubeTrans = newCube.GetComponent<Transform>();
 			cubeTransList.Add(cubeTrans);
+
+			cubeComponent = newCube.GetComponent<Cube>();
+			cubeComponentList.Add(cubeComponent);
 
 		}
 
@@ -81,29 +91,27 @@ public class Spawner : MonoBehaviour {
 			if(!cubeList[i].activeInHierarchy)
 			{
 				
-				cubeTransList[i].position = new Vector3(xPos, isSecond? 15f: -15f, 0f);
-					
+				cubeTransList[i].position = new Vector3(xPos, isSecond? 12f: -12f, 0f);
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
 				cubeList[i].SetActive(true);
+
+//				Cube cube = cubeList[i].gameObject.GetComponent<Cube>();
+//				cube.StartMoveCube(2f);
+
+				cubeComponentList[i].StartMoveCube(7f);
 
 				isSecond = !isSecond;
 				if(isSecond){
 					xPos++;
 					break;
 				}
-					
-
 			}
 		}
 
 		yield return 0;
 	}
 
-	IEnumerator MoveCube(Transform currCubeTran)
-	{
-		yield return 0;
-	}
 
 
 
@@ -112,12 +120,12 @@ public class Spawner : MonoBehaviour {
 		for(int i = 0; i < InitialCubeNum; i += 2)
 		{
 			
-			cubeTransList[i].position = new Vector3(xPos, yPos + 15f, 0f);
+			cubeTransList[i].position = new Vector3(xPos, yPos + 20f, 0f);
 			cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
 			cubeList[i].SetActive(true);
 
-			cubeTransList[i + 1].position =  new Vector3(xPos, yPos - 15f, 0f);
+			cubeTransList[i + 1].position =  new Vector3(xPos, yPos - 20f, 0f);
 			cubeTransList[i + 1].rotation = Quaternion.Euler(0f,0f,0f);
 
 			cubeList[i + 1].SetActive(true);

@@ -1,13 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/CameraMove.cs">
-    <Files>
-      <File FileName="Assets/__Scripts/Spawner.cs" Line="34" Column="18" />
-      <File FileName="Assets/__Scripts/Destroyer.cs" Line="9" Column="5" />
-      <File FileName="Assets/__Scripts/Player.cs" Line="40" Column="2" />
-      <File FileName="Assets/__Scripts/CameraMove.cs" Line="29" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
