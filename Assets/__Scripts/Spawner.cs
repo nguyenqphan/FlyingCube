@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour {
 	private bool isSecond;
 
 	private int xPos;
-	private int yPos;
+	private int yPos = 0;
 
 	private Vector3 currCubePos()
 	{
@@ -99,11 +99,20 @@ public class Spawner : MonoBehaviour {
 //				Cube cube = cubeList[i].gameObject.GetComponent<Cube>();
 //				cube.StartMoveCube(2f);
 
-				cubeComponentList[i].StartMoveCube(7f);
+
+
+				if(GameManager.Instance.NumSpawnedCube > 15 && isSecond)
+				{
+					cubeComponentList[i].StartMoveTopCube(7f);
+				}
+				else{
+					cubeComponentList[i].StartMoveDown(7f);
+				}
 
 				isSecond = !isSecond;
 				if(isSecond){
 					xPos++;
+					GameManager.Instance.NumSpawnedCube += 2;
 					break;
 				}
 			}
