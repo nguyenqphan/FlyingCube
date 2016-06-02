@@ -56,31 +56,34 @@ public class Cube : MonoBehaviour {
 		isMoving = true;
 	}
 
-	public void StartMoveTopCube(float distance)
-	{
-		StartCoroutine(MoveTopCube(distance));
-	}
-
-
-	IEnumerator MoveTopCube(float distance)
-	{
-		startingY = cubeTrans.localPosition.y;
-		while(isMoving)
-		{
-			newY = cubeTrans.localPosition.y + distance * speed * direction * Time.deltaTime;
-
-			if(newY >= startingY + distance)
-			{
-				newY = Mathf.Floor(newY);
-				isMoving = false;
-			}
-
-			cubeTrans.localPosition = new Vector3(cubeTrans.localPosition.x, newY, cubeTrans.localPosition.z);
-
-			yield return 0;
-		}
-		isMoving = true;
-	}
+//	public void StartMoveTopCube(float distance)
+//	{
+//		StartCoroutine(MoveTopCube(distance));
+//	}
+//
+//
+//	IEnumerator MoveTopCube(float distance)
+//	{
+//		startingY = cubeTrans.localPosition.y;
+//		if(distance < 1f){
+//			isMoving = false;
+//		}
+//		while(isMoving)
+//		{
+//			newY = cubeTrans.localPosition.y + distance * speed * direction * Time.deltaTime;
+//
+//			if(newY > startingY + distance)
+//			{
+//				newY = Mathf.Floor(newY);
+//				isMoving = false;
+//			}
+//
+//			cubeTrans.localPosition = new Vector3(cubeTrans.localPosition.x, newY, cubeTrans.localPosition.z);
+//
+//			yield return 0;
+//		}
+//		isMoving = true;
+//	}
 
 	public void StartMoveDown(float distance)
 	{

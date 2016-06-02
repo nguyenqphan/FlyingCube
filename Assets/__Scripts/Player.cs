@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	private Transform playerTrans;
 	private Rigidbody playerRigid;
 
 	private bool tap;
@@ -11,7 +10,6 @@ public class Player : MonoBehaviour {
 
 	void Awake()
 	{
-		playerTrans = GetComponent<Transform>();
 		playerRigid = GetComponent<Rigidbody>();
 	}
 

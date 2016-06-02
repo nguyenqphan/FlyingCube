@@ -26,6 +26,11 @@ public class Spawner : MonoBehaviour {
 	private int xPos;
 	private int yPos = 0;
 
+	private float unit = 9f;
+	private bool switchPlusMinus;
+
+	private int tallSize;
+
 	private Vector3 currCubePos()
 	{
 		return new Vector3(xPos, yPos, 0);	
@@ -42,6 +47,7 @@ public class Spawner : MonoBehaviour {
 		InitialCubeNum = 32;
 		isSecond = true;
 
+		tallSize = 3;
 
 		cubeList = new List<GameObject>();
 
@@ -91,24 +97,20 @@ public class Spawner : MonoBehaviour {
 			if(!cubeList[i].activeInHierarchy)
 			{
 				
-				cubeTransList[i].position = new Vector3(xPos, isSecond? 12f: -12f, 0f);
+//				cubeTransList[i].position = new Vector3(xPos, isSecond? 12f : -12f, 0f);
+				cubeTransList[i].position = new Vector3(xPos, YPosition(), 0f);
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
 				cubeList[i].SetActive(true);
 
-//				Cube cube = cubeList[i].gameObject.GetComponent<Cube>();
-//				cube.StartMoveCube(2f);
-
-
-
-				if(GameManager.Instance.NumSpawnedCube > 15 && isSecond)
+				if(isSecond)
 				{
-					cubeComponentList[i].StartMoveTopCube(7f);
+					cubeComponentList[i].StartMoveCube(ChooseShape());
 				}
 				else{
-					cubeComponentList[i].StartMoveDown(7f);
+					cubeComponentList[i].StartMoveDown(ChooseShape() - .5f);
 				}
-
+//				YPosition();
 				isSecond = !isSecond;
 				if(isSecond){
 					xPos++;
@@ -119,6 +121,80 @@ public class Spawner : MonoBehaviour {
 		}
 
 		yield return 0;
+	}
+
+	private float YPosition()
+	{
+		if(isSecond)
+		{
+			return 12f;
+		}
+		else{
+			return -12f;
+		}
+	}
+
+	bool temp;
+
+	private float ChooseShape()
+	{
+		if(temp){
+			temp = !temp;
+		 return SquareShape();
+		}
+		else{
+			temp = !temp;
+			return PlayShape();
+		}
+
+	}
+
+	private float SquareShape(){
+
+		if (isSecond) {
+			if (switchPlusMinus) {
+				unit = unit + 1f;
+				if (unit > 8f) {
+					switchPlusMinus = !switchPlusMinus;
+				}
+			} else {
+				unit = unit - 1f;
+				if (unit < 0) {
+					switchPlusMinus = !switchPlusMinus;
+					ChooseShape();
+				}
+			}
+		}
+		return unit;
+	}
+
+	private float PlayShape()
+	{
+		if(isSecond)
+		{
+			unit -= 1;
+		}
+		if(unit  < 0)
+		{
+			unit = 7; 
+			ChooseShape();
+		}
+		return unit;
+	}
+
+	private float EmptyShape()
+	{
+		return 8;
+	}
+
+	private float TallShape()
+	{
+		tallSize--;
+		if(isSecond )
+		{
+			return 8f;
+		}
+		return 8;
 	}
 
 
