@@ -122,31 +122,17 @@ public class Spawner : MonoBehaviour {
 
 		yield return 0;
 	}
-
-	private float YPosition()
-	{
-		if(isSecond)
-		{
-			return 12f;
-		}
-		else{
-			return -12f;
-		}
-	}
-
-	bool temp = true;
-
+		
+	private int shapeValue;
 	private float ChooseShape()
 	{
-		if(temp){
+		switch(shapeValue)
+		{
+			case 0:  return SquareShape();
+			case 1:  return PlayShape();
 			
-		 return SquareShape();
+			default: return SquareShape();
 		}
-		else{
-
-			return PlayShape();
-		}
-
 	}
 
 	private float SquareShape(){
@@ -156,7 +142,7 @@ public class Spawner : MonoBehaviour {
 				unit = unit + 1f;
 				if (unit > 7f) {
 					switchPlusMinus = !switchPlusMinus;
-					temp = !temp;
+					shapeValue = 1;
 				}
 			} else {
 				unit = unit - 1f;
@@ -177,16 +163,13 @@ public class Spawner : MonoBehaviour {
 			if(unit < 1)
 			{
 				unit = 7; 
-							temp = !temp;
-
+				shapeValue = 0;
 			}
 			unit -= 1;
 		}
 		if(unit  < 0)
 		{
 			unit = 7; 
-//			temp = !temp;
-
 		}
 		return unit;
 	}
@@ -205,9 +188,6 @@ public class Spawner : MonoBehaviour {
 		}
 		return 8;
 	}
-
-
-
 
 	IEnumerator LayoutCube()
 	{
@@ -232,5 +212,16 @@ public class Spawner : MonoBehaviour {
 	void FindCube()
 	{
 		
+	}
+
+	private float YPosition()
+	{
+		if(isSecond)
+		{
+			return 12f;
+		}
+		else{
+			return -12f;
+		}
 	}
 }
