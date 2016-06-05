@@ -37,6 +37,11 @@ public class Cube : MonoBehaviour {
 	IEnumerator MoveCube(float distance)
 	{
 		startingY = cubeTrans.localPosition.y;
+
+		//condition to fix the bug that the last cube does not position correctly.
+		if(distance < 1f){
+					isMoving = false; 
+			}
 		while(isMoving)
 		{
 			newY = cubeTrans.localPosition.y + distance * speed * direction * Time.deltaTime;

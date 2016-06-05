@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour {
 	private int xPos;
 	private int yPos = 0;
 
-	private float unit = 9f;
+	private float unit = 7f;
 	private bool switchPlusMinus;
 
 	private int tallSize;
@@ -96,8 +96,6 @@ public class Spawner : MonoBehaviour {
 		{
 			if(!cubeList[i].activeInHierarchy)
 			{
-				
-//				cubeTransList[i].position = new Vector3(xPos, isSecond? 12f : -12f, 0f);
 				cubeTransList[i].position = new Vector3(xPos, YPosition(), 0f);
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
@@ -106,9 +104,11 @@ public class Spawner : MonoBehaviour {
 				if(isSecond)
 				{
 					cubeComponentList[i].StartMoveCube(ChooseShape());
+					Debug.Log("Second " + unit);
 				}
 				else{
 					cubeComponentList[i].StartMoveDown(ChooseShape() - .5f);
+					Debug.Log("first " + unit);
 				}
 //				YPosition();
 				isSecond = !isSecond;
@@ -134,34 +134,35 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
-	bool temp;
+	bool temp = true;
 
 	private float ChooseShape()
 	{
 		if(temp){
-			temp = !temp;
+			
 		 return SquareShape();
 		}
 		else{
-			temp = !temp;
+
 			return PlayShape();
 		}
 
 	}
 
 	private float SquareShape(){
-
+		Debug.Log("Im in Square Shape");
 		if (isSecond) {
 			if (switchPlusMinus) {
 				unit = unit + 1f;
-				if (unit > 8f) {
+				if (unit > 7f) {
 					switchPlusMinus = !switchPlusMinus;
+					temp = !temp;
 				}
 			} else {
 				unit = unit - 1f;
-				if (unit < 0) {
+				if (unit  == 0) {
 					switchPlusMinus = !switchPlusMinus;
-					ChooseShape();
+
 				}
 			}
 		}
@@ -170,14 +171,22 @@ public class Spawner : MonoBehaviour {
 
 	private float PlayShape()
 	{
+		Debug.Log("Im in PlayShape Shape");
 		if(isSecond)
 		{
+			if(unit < 1)
+			{
+				unit = 7; 
+							temp = !temp;
+
+			}
 			unit -= 1;
 		}
 		if(unit  < 0)
 		{
 			unit = 7; 
-			ChooseShape();
+//			temp = !temp;
+
 		}
 		return unit;
 	}
