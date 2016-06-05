@@ -39,9 +39,9 @@ public class Cube : MonoBehaviour {
 		startingY = cubeTrans.localPosition.y;
 
 		//condition to fix the bug that the last cube does not position correctly.
-		if(distance < 1f){
-					isMoving = false; 
-			}
+//		if(distance < 1f){
+//					isMoving = false; 
+//			}
 		while(isMoving)
 		{
 			newY = cubeTrans.localPosition.y + distance * speed * direction * Time.deltaTime;
@@ -104,7 +104,7 @@ public class Cube : MonoBehaviour {
 
 			if(newY  < startingY - distance)
 			{
-				newY = Mathf.Floor(newY);
+				newY = Mathf.Ceil(newY);
 				isMoving = false;
 			}
 

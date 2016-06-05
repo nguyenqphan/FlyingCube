@@ -107,7 +107,7 @@ public class Spawner : MonoBehaviour {
 					Debug.Log("Second " + unit);
 				}
 				else{
-					cubeComponentList[i].StartMoveDown(ChooseShape() - .5f);
+					cubeComponentList[i].StartMoveDown(ChooseShape());
 					Debug.Log("first " + unit);
 				}
 //				YPosition();
@@ -130,7 +130,7 @@ public class Spawner : MonoBehaviour {
 		{
 			case 0:  return SquareShape();
 			case 1:  return PlayShape();
-			
+			case 2: return EmptyShape();
 			default: return SquareShape();
 		}
 	}
@@ -176,7 +176,7 @@ public class Spawner : MonoBehaviour {
 
 	private float EmptyShape()
 	{
-		return 8;
+		return 1;
 	}
 
 	private float TallShape()
