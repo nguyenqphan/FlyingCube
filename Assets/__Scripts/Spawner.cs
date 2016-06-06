@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour {
 
 	private int cubeAmount;
 	private int InitialCubeNum;
-	private bool isSecond;
+	private bool isFirst;
 
 	private int xPos;
 	private int yPos = 0;
@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour {
 	void Start () {
 		cubeAmount = 40;
 		InitialCubeNum = 32;
-		isSecond = true;
+		isFirst = true;
 
 		tallSize = 3;
 
@@ -101,18 +101,18 @@ public class Spawner : MonoBehaviour {
 
 				cubeList[i].SetActive(true);
 
-				if(isSecond)
+				if(isFirst)
 				{
 					cubeComponentList[i].StartMoveCube(ChooseShape());
-					Debug.Log("Second " + unit);
+					Debug.Log("First " + unit);
 				}
 				else{
 					cubeComponentList[i].StartMoveDown(ChooseShape());
-					Debug.Log("first " + unit);
+					Debug.Log("Second " + unit);
 				}
 //				YPosition();
-				isSecond = !isSecond;
-				if(isSecond){
+				isFirst = !isFirst;
+				if(isFirst){
 					xPos++;
 					GameManager.Instance.NumSpawnedCube += 2;
 					break;
@@ -135,14 +135,16 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
+
+
 	private float SquareShape(){
 		Debug.Log("Im in Square Shape");
-		if (isSecond) {
+		if (isFirst) {
 			if (switchPlusMinus) {
 				unit = unit + 1f;
 				if (unit > 7f) {
 					switchPlusMinus = !switchPlusMinus;
-					shapeValue = 1;
+//					shapeValue = 2;								//change the shape, exit this function
 				}
 			} else {
 				unit = unit - 1f;
@@ -151,6 +153,12 @@ public class Spawner : MonoBehaviour {
 
 				}
 			}
+		}else{
+			if (unit == 0) {
+//				switchPlusMinus = !switchPlusMinus;
+				shapeValue =2;								//change the shape, exit this function
+		
+			}
 		}
 		return unit;
 	}
@@ -158,11 +166,11 @@ public class Spawner : MonoBehaviour {
 	private float PlayShape()
 	{
 		Debug.Log("Im in PlayShape Shape");
-		if(isSecond)
+		if(isFirst)
 		{
 			if(unit < 1)
 			{
-				unit = 7; 
+				unit = 2; 
 				shapeValue = 0;
 			}
 			unit -= 1;
@@ -174,15 +182,31 @@ public class Spawner : MonoBehaviour {
 		return unit;
 	}
 
+
+	private int numOfSpace = 0;
+	private int maxSpace = 5;
 	private float EmptyShape()
 	{
-		return 1;
+		Debug.Log("I am in Empty Shape");
+		if (isFirst) {
+			numOfSpace++;
+
+		}
+		else{
+			if (numOfSpace > maxSpace - 1) {
+				shapeValue = 1;								//Change the shape
+				unit = 7;									//PlayShape() has to start at unit 7
+				numOfSpace = 0;								//reset numOfSpace
+			}
+		}
+
+		return 8;
 	}
 
 	private float TallShape()
 	{
 		tallSize--;
-		if(isSecond )
+		if(isFirst )
 		{
 			return 8f;
 		}
@@ -216,7 +240,7 @@ public class Spawner : MonoBehaviour {
 
 	private float YPosition()
 	{
-		if(isSecond)
+		if(isFirst)
 		{
 			return 12f;
 		}
