@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 
+	private bool isBlockShape = false;
+	private bool isEmptyShape = false;
+	private bool isZigzag = false;
+
 	private Transform spawnerTrans;
 
 	public GameObject cube;
@@ -26,8 +30,8 @@ public class Spawner : MonoBehaviour {
 	private int xPos;
 	private int yPos = 0;
 
-	private float unit = 7f;
-	private bool switchPlusMinus;
+	private float unit = 6f;
+	private bool switchPlusMinus = true;
 
 	private int tallSize;
 
@@ -107,7 +111,12 @@ public class Spawner : MonoBehaviour {
 					Debug.Log("First " + unit);
 				}
 				else{
-					cubeComponentList[i].StartMoveDown(ChooseShape());
+					if (!isBlockShape || isEmptyShape ) {
+						cubeComponentList [i].StartMoveDown (ChooseShape ());
+					}
+					else{
+						cubeComponentList[i].StartMoveCube(ChooseShape());
+					}
 					Debug.Log("Second " + unit);
 				}
 //				YPosition();
@@ -123,15 +132,17 @@ public class Spawner : MonoBehaviour {
 		yield return 0;
 	}
 		
-	private int shapeValue;
+	private int shapeValue = 0;
 	private float ChooseShape()
 	{
 		switch(shapeValue)
 		{
-			case 0:  return SquareShape();
+			case 0:  return EmptyShape();
 			case 1:  return PlayShape();
-			case 2: return EmptyShape();
-			default: return SquareShape();
+			case 2: return SquareShape();
+		
+		
+			default: return EmptyShape();
 		}
 	}
 
@@ -142,7 +153,7 @@ public class Spawner : MonoBehaviour {
 		if (isFirst) {
 			if (switchPlusMinus) {
 				unit = unit + 1f;
-				if (unit > 7f) {
+				if (unit > 5f) {
 					switchPlusMinus = !switchPlusMinus;
 //					shapeValue = 2;								//change the shape, exit this function
 				}
@@ -156,8 +167,8 @@ public class Spawner : MonoBehaviour {
 		}else{
 			if (unit == 0) {
 //				switchPlusMinus = !switchPlusMinus;
-				shapeValue =2;								//change the shape, exit this function
-		
+				shapeValue =0;								//change the shape, exit this function
+				isBlockShape = !isBlockShape;
 			}
 		}
 		return unit;
@@ -171,7 +182,7 @@ public class Spawner : MonoBehaviour {
 			if(unit < 1)
 			{
 				unit = 2; 
-				shapeValue = 0;
+				shapeValue = 2;
 			}
 			unit -= 1;
 		}
@@ -187,6 +198,7 @@ public class Spawner : MonoBehaviour {
 	private int maxSpace = 5;
 	private float EmptyShape()
 	{
+		isEmptyShape = true;
 		Debug.Log("I am in Empty Shape");
 		if (isFirst) {
 			numOfSpace++;
@@ -194,23 +206,24 @@ public class Spawner : MonoBehaviour {
 		}
 		else{
 			if (numOfSpace > maxSpace - 1) {
-				shapeValue = 1;								//Change the shape
-				unit = 7;									//PlayShape() has to start at unit 7
+				isEmptyShape = false;
+				shapeValue = 2;								//Change the shape
+				unit = 1;									//PlayShape() has to start at unit 7
 				numOfSpace = 0;								//reset numOfSpace
 			}
 		}
 
-		return 8;
+		return 6;
 	}
 
-	private float TallShape()
+	private float BlockShape()
 	{
 		tallSize--;
 		if(isFirst )
 		{
-			return 8f;
+			return 7f;
 		}
-		return 8;
+		return 7;
 	}
 
 	IEnumerator LayoutCube()
@@ -240,12 +253,26 @@ public class Spawner : MonoBehaviour {
 
 	private float YPosition()
 	{
-		if(isFirst)
+		if(isBlockShape)
 		{
-			return 12f;
+			isZigzag = true;
 		}
 		else{
-			return -12f;
+			isZigzag = false;
+		}
+
+		if(isFirst)
+		{
+			if(isZigzag)
+				return 13f;
+			else
+				return 12f;
+		}
+		else{
+			if(isZigzag)
+				return -13f;
+			else
+				return -12f;
 		}
 	}
 }
