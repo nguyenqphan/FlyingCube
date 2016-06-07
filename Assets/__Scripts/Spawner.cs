@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour {
 
 	private bool isBlockShape = false;				//Move Cube Up when it is true;
 	private bool isEmptyShape = false;				//EmptyShape() is is progress
-	private bool isZigzag = true;					//Control the initial position. Make the distance bigger	
+	private bool isZigzag = false;					//Control the initial position. Make the distance bigger	
 	private bool isMoveDown = false;				//Move Cube down when it is true
 	private Transform spawnerTrans;
 
@@ -109,9 +109,12 @@ public class Spawner : MonoBehaviour {
 				{
 					if (!isMoveDown || !isEmptyShape) {
 						cubeComponentList [i].StartMoveCube (ChooseShape());
+//						Debug.Log("Move Up");
 
 					}
 					else{
+
+						Debug.Log("Move Down");
 						cubeComponentList [i].StartMoveDown (ChooseShape ());
 
 					}
@@ -149,7 +152,9 @@ public class Spawner : MonoBehaviour {
 			case 1: return SquareShape();
 			case 2: return BlockShape();
 			case 3: return BlockShape2();
-			
+			case 4: return VShape();
+
+
 			default: return EmptyShape();
 		}
 	}
@@ -158,6 +163,10 @@ public class Spawner : MonoBehaviour {
 
 	private float SquareShape(){
 //		Debug.Log("Im in Square Shape");
+//		isMoveDown = true;
+//		isEmptyShape = true;
+		isBlockShape = false;
+		Debug.Log("Is Down " + isMoveDown);
 		if (isFirst) {
 			if (switchPlusMinus) {
 				unit = unit + 1f;
@@ -176,8 +185,82 @@ public class Spawner : MonoBehaviour {
 			if (unit == 0) {
 //				switchPlusMinus = !switchPlusMinus;
 				shapeValue =0;								//change the shape, exit this function
+//				isBlockShape = !isBlockShape;
+//				isZigzag = !isZigzag;
+//				isMoveDown = !isMoveDown;
+//				isEmptyShape = false;
+				isBlockShape = true;
+			}
+		}
+		return unit;
+	}
+
+	private float VReverseShape(){
+		//		Debug.Log("Im in Square Shape");
+		//		isMoveDown = true;
+		//		isEmptyShape = true;
+		//		isBlockShape = false;
+		isBlockShape = true;
+		isZigzag = true;
+		Debug.Log("Is Down " + isMoveDown);
+		if (isFirst) {
+			if (switchPlusMinus) {
+				unit = unit + 1f;
+				if (unit > 5f) {
+					switchPlusMinus = !switchPlusMinus;
+					//					shapeValue = 2;								//change the shape, exit this function
+				}
+			} else {
+				unit = unit - 1f;
+				if (unit  == 0) {
+					switchPlusMinus = !switchPlusMinus;
+
+				}
+			}
+		}else{
+			if (unit == 0) {
+				//				switchPlusMinus = !switchPlusMinus;
+				shapeValue =0;								//change the shape, exit this function
 				isBlockShape = !isBlockShape;
 				isZigzag = !isZigzag;
+				//				isMoveDown = !isMoveDown;
+				//				isEmptyShape = false;
+				//				isBlockShape = true;
+			}
+		}
+		return unit;
+	}
+
+	private float VShape(){
+		//		Debug.Log("Im in Square Shape");
+		isMoveDown = true;
+		isEmptyShape = true;
+		isZigzag = true;
+		//		isBlockShape = false;
+		Debug.Log("Is Down " + isMoveDown);
+		if (isFirst) {
+			if (switchPlusMinus) {
+				unit = unit + 1f;
+				if (unit > 5f) {
+					switchPlusMinus = !switchPlusMinus;
+					//					shapeValue = 2;								//change the shape, exit this function
+				}
+			} else {
+				unit = unit - 1f;
+				if (unit  == 0) {
+					switchPlusMinus = !switchPlusMinus;
+
+				}
+			}
+		}else{
+			if (unit == 0) {
+				//				switchPlusMinus = !switchPlusMinus;
+				shapeValue =0;								//change the shape, exit this function
+				isBlockShape = !isBlockShape;
+				isZigzag = !isZigzag;
+				isMoveDown = !isMoveDown;
+				isEmptyShape = false;
+				//				isBlockShape = true;
 			}
 		}
 		return unit;
@@ -220,12 +303,12 @@ public class Spawner : MonoBehaviour {
 //				shapeValue = 3;
 				countShape++;
 				shapeValue = shapeValue + countShape;								//Change the shape
-				if(shapeValue > 3){
+				if(shapeValue > 4){
 					countShape = 0;
 					shapeValue = 1;
 				}
 ////
-				Debug.Log(shapeValue);
+//				Debug.Log(shapeValue);
 
 				unit = 1	;									//PlayShape() has to start at unit 7
 				numOfSpace = 0;								//reset numOfSpace
@@ -266,7 +349,7 @@ public class Spawner : MonoBehaviour {
 		isEmptyShape = true;
 		isBlockShape = false;
 		isMoveDown = true;
-		Debug.Log("Im in BlockShape 2");
+//		Debug.Log("Im in BlockShape 2");
 //		isBlockShape = true;
 		if(isFirst )
 		{
@@ -285,10 +368,10 @@ public class Spawner : MonoBehaviour {
 			}	
 		}
 
-		Debug.Log(isBlockShape + " IsBlockShape");
-		Debug.Log(isMoveDown + " IsMovingDown");
-		Debug.Log(isEmptyShape + " IsEmpty");
-		Debug.Log("-----------------------------------------");
+////		Debug.Log(isBlockShape + " IsBlockShape");
+//		Debug.Log(isMoveDown + " IsMovingDown");
+//		Debug.Log(isEmptyShape + " IsEmpty");
+//		Debug.Log("-----------------------------------------");
 
 		return 6;
 	}
