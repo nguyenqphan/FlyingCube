@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 
-	private bool isBlockShape = false;
-	private bool isEmptyShape = false;
-	private bool isZigzag = false;
-
+	private bool isBlockShape = false;				//Move Cube Up when it is true;
+	private bool isEmptyShape = false;				//EmptyShape() is is progress
+	private bool isZigzag = false;					//Control the initial position. Make the distance bigger	
+	private bool isMoveDown = false;				//Move Cube down when it is true
 	private Transform spawnerTrans;
 
 	public GameObject cube;
@@ -107,7 +107,14 @@ public class Spawner : MonoBehaviour {
 
 				if(isFirst)
 				{
-					cubeComponentList[i].StartMoveCube(ChooseShape());
+					if (!isMoveDown || !isEmptyShape) {
+						cubeComponentList [i].StartMoveCube (ChooseShape ());
+
+					}
+					else{
+						cubeComponentList [i].StartMoveDown (ChooseShape ());
+
+					}
 					Debug.Log("First " + unit);
 				}
 				else{
@@ -140,8 +147,9 @@ public class Spawner : MonoBehaviour {
 			case 0:  return EmptyShape();
 			case 1:  return PlayShape();
 			case 2: return SquareShape();
-		
-		
+			case 3: return BlockShape();
+			case 4: return BlockShape2();
+			
 			default: return EmptyShape();
 		}
 	}
@@ -207,7 +215,7 @@ public class Spawner : MonoBehaviour {
 		else{
 			if (numOfSpace > maxSpace - 1) {
 				isEmptyShape = false;
-				shapeValue = 2;								//Change the shape
+				shapeValue = 3;								//Change the shape
 				unit = 1;									//PlayShape() has to start at unit 7
 				numOfSpace = 0;								//reset numOfSpace
 			}
@@ -218,13 +226,46 @@ public class Spawner : MonoBehaviour {
 
 	private float BlockShape()
 	{
-		tallSize--;
+		
+		isBlockShape = true;
 		if(isFirst )
 		{
-			return 7f;
+			tallSize--;
+			return 5f;
 		}
-		return 7;
+		else
+		{
+			if(tallSize < 0)
+			{
+				shapeValue = 0;
+				tallSize = 3;
+			}	
+		}
+
+		return 5;
 	}
+
+	private float BlockShape2()
+	{
+		isMoveDown = true;
+		isBlockShape = false;
+		if(isFirst )
+		{
+			tallSize--;
+			return 6f;
+		}
+		else
+		{
+			if(tallSize < 1)
+			{
+				shapeValue = 0;
+				tallSize = 3;
+			}	
+		}
+
+		return 6;
+	}
+
 
 	IEnumerator LayoutCube()
 	{
@@ -253,13 +294,6 @@ public class Spawner : MonoBehaviour {
 
 	private float YPosition()
 	{
-		if(isBlockShape)
-		{
-			isZigzag = true;
-		}
-		else{
-			isZigzag = false;
-		}
 
 		if(isFirst)
 		{
