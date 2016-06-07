@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour {
 
 	private bool isBlockShape = false;				//Move Cube Up when it is true;
 	private bool isEmptyShape = false;				//EmptyShape() is is progress
-	private bool isZigzag = false;					//Control the initial position. Make the distance bigger	
+	private bool isZigzag = true;					//Control the initial position. Make the distance bigger	
 	private bool isMoveDown = false;				//Move Cube down when it is true
 	private Transform spawnerTrans;
 
@@ -108,14 +108,14 @@ public class Spawner : MonoBehaviour {
 				if(isFirst)
 				{
 					if (!isMoveDown || !isEmptyShape) {
-						cubeComponentList [i].StartMoveCube (ChooseShape ());
+						cubeComponentList [i].StartMoveCube (ChooseShape());
 
 					}
 					else{
 						cubeComponentList [i].StartMoveDown (ChooseShape ());
 
 					}
-					Debug.Log("First " + unit);
+//					Debug.Log("First " + unit);
 				}
 				else{
 					if (!isBlockShape || isEmptyShape ) {
@@ -124,7 +124,7 @@ public class Spawner : MonoBehaviour {
 					else{
 						cubeComponentList[i].StartMoveCube(ChooseShape());
 					}
-					Debug.Log("Second " + unit);
+//					Debug.Log("Second " + unit);
 				}
 //				YPosition();
 				isFirst = !isFirst;
@@ -145,10 +145,10 @@ public class Spawner : MonoBehaviour {
 		switch(shapeValue)
 		{
 			case 0:  return EmptyShape();
-			case 1:  return PlayShape();
-			case 2: return SquareShape();
-			case 3: return BlockShape();
-			case 4: return BlockShape2();
+//			case 1:  return EmptyShape();
+			case 1: return SquareShape();
+			case 2: return BlockShape();
+			case 3: return BlockShape2();
 			
 			default: return EmptyShape();
 		}
@@ -157,7 +157,7 @@ public class Spawner : MonoBehaviour {
 
 
 	private float SquareShape(){
-		Debug.Log("Im in Square Shape");
+//		Debug.Log("Im in Square Shape");
 		if (isFirst) {
 			if (switchPlusMinus) {
 				unit = unit + 1f;
@@ -177,6 +177,7 @@ public class Spawner : MonoBehaviour {
 //				switchPlusMinus = !switchPlusMinus;
 				shapeValue =0;								//change the shape, exit this function
 				isBlockShape = !isBlockShape;
+				isZigzag = !isZigzag;
 			}
 		}
 		return unit;
@@ -184,13 +185,13 @@ public class Spawner : MonoBehaviour {
 
 	private float PlayShape()
 	{
-		Debug.Log("Im in PlayShape Shape");
+//		Debug.Log("Im in PlayShape Shape");
 		if(isFirst)
 		{
 			if(unit < 1)
 			{
-				unit = 2; 
-				shapeValue = 2;
+				unit = 7; 
+				shapeValue = 0;
 			}
 			unit -= 1;
 		}
@@ -203,11 +204,12 @@ public class Spawner : MonoBehaviour {
 
 
 	private int numOfSpace = 0;
-	private int maxSpace = 5;
+	private int maxSpace = 4;
+	private int countShape = 0;
 	private float EmptyShape()
 	{
 		isEmptyShape = true;
-		Debug.Log("I am in Empty Shape");
+//		Debug.Log("I am in Empty Shape");
 		if (isFirst) {
 			numOfSpace++;
 
@@ -215,18 +217,30 @@ public class Spawner : MonoBehaviour {
 		else{
 			if (numOfSpace > maxSpace - 1) {
 				isEmptyShape = false;
-				shapeValue = 3;								//Change the shape
-				unit = 1;									//PlayShape() has to start at unit 7
+//				shapeValue = 3;
+				countShape++;
+				shapeValue = shapeValue + countShape;								//Change the shape
+				if(shapeValue > 3){
+					countShape = 0;
+					shapeValue = 1;
+				}
+////
+				Debug.Log(shapeValue);
+
+				unit = 1	;									//PlayShape() has to start at unit 7
 				numOfSpace = 0;								//reset numOfSpace
 			}
 		}
+
+//		Debug.Log("Number Of Space " + numOfSpace);
 
 		return 6;
 	}
 
 	private float BlockShape()
 	{
-		
+//			Debug.Log("Iam in BlockShape");
+	
 		isBlockShape = true;
 		if(isFirst )
 		{
@@ -238,7 +252,9 @@ public class Spawner : MonoBehaviour {
 			if(tallSize < 0)
 			{
 				shapeValue = 0;
-				tallSize = 3;
+				tallSize = 4;
+//				isBlockShape = false;	
+
 			}	
 		}
 
@@ -247,8 +263,11 @@ public class Spawner : MonoBehaviour {
 
 	private float BlockShape2()
 	{
-		isMoveDown = true;
+		isEmptyShape = true;
 		isBlockShape = false;
+		isMoveDown = true;
+		Debug.Log("Im in BlockShape 2");
+//		isBlockShape = true;
 		if(isFirst )
 		{
 			tallSize--;
@@ -256,12 +275,20 @@ public class Spawner : MonoBehaviour {
 		}
 		else
 		{
-			if(tallSize < 1)
+			if(tallSize < 0)
 			{
 				shapeValue = 0;
 				tallSize = 3;
+				isEmptyShape = false;
+				isMoveDown = false;
+
 			}	
 		}
+
+		Debug.Log(isBlockShape + " IsBlockShape");
+		Debug.Log(isMoveDown + " IsMovingDown");
+		Debug.Log(isEmptyShape + " IsEmpty");
+		Debug.Log("-----------------------------------------");
 
 		return 6;
 	}
