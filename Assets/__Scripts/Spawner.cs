@@ -14,15 +14,22 @@ public class Spawner : MonoBehaviour {
 	private Transform spawnerTrans;
 
 	public GameObject cube;
+	public GameObject smallCube;
 
 	private Cube cubeComponent;
+	private Cube smallCubeComponent;
+
 	private Transform cubeTrans;
+	private Transform smallCubeTrans;
 
 	private List<GameObject> cubeList;
+	private List<GameObject> smallCubeList;
 
 	private List<Transform> cubeTransList;
+	private List<Transform> smallCubeTransList;
 
 	private List<Cube> cubeComponentList;
+	private List<Cube> smallCubeComponentList;
 
 	private int cubeAmount;
 	private int InitialCubeNum;
@@ -55,10 +62,13 @@ public class Spawner : MonoBehaviour {
 		tallSize = 3;
 
 		cubeList = new List<GameObject>();
+		smallCubeList = new List<GameObject>();
 
 		cubeTransList = new List<Transform>();
+		smallCubeTransList = new List<Transform>();
 
 		cubeComponentList = new List<Cube>();
+		smallCubeComponentList = new List<Cube>();
 
 		for(int i = 0; i < cubeAmount; i++)
 		{
@@ -76,6 +86,23 @@ public class Spawner : MonoBehaviour {
 			cubeComponent = newCube.GetComponent<Cube>();
 			cubeComponentList.Add(cubeComponent);
 
+		}
+
+		for(int i = 0; i < cubeAmount; i++)
+		{
+			GameObject newSmallCube = Instantiate(smallCube, spawnerTrans.position, Quaternion.identity) as GameObject;
+
+			newSmallCube.transform.parent = spawnerTrans;
+
+			newSmallCube.SetActive(false);
+
+			smallCubeList.Add(newSmallCube);
+
+			smallCubeTrans = newSmallCube.GetComponent<Transform>();
+			smallCubeTransList.Add(smallCubeTrans);
+
+			smallCubeComponent = newSmallCube.GetComponent<Cube>();
+			smallCubeComponentList.Add(smallCubeComponent);
 		}
 
 		StartCoroutine(LayoutCube());
@@ -148,13 +175,41 @@ public class Spawner : MonoBehaviour {
 		case 2: return BlockShape();
 		case 3: return BlockShape2();
 		case 4: return VShape();
-		case 5: return VReverseShape();
-		case 6: return Spike();
+		case 5: return Spike();
+		case 6: return VReverseShape();
+		case 7: return BlockShape();
 
 		default: return EmptyShape();
 		}
 	}
+		
+	private int numOfSpace = 0;
+	private int maxSpace = 4;
+	private int countShape = 0;
+	private float EmptyShape()
+	{
+		isEmptyShape = true;
+		isZigzag = false;
 
+		if (isFirst) {
+			numOfSpace++;
+		}
+		else{
+			if (numOfSpace > maxSpace) {
+
+				countShape++;
+				shapeValue = shapeValue + countShape;								//Change the shape
+				if(shapeValue > 7){
+					countShape = 1;
+					shapeValue = 1;
+				}
+
+				numOfSpace = 0;								//reset numOfSpace
+			}
+		}
+
+		return 6;
+	}
 
 
 	private float SquareShape(){
@@ -234,34 +289,6 @@ public class Spawner : MonoBehaviour {
 	}
 		
 
-	private int numOfSpace = 0;
-	private int maxSpace = 4;
-	private int countShape = 0;
-	private float EmptyShape()
-	{
-		isEmptyShape = true;
-		isZigzag = false;
-
-		if (isFirst) {
-			numOfSpace++;
-
-		}
-		else{
-			if (numOfSpace > maxSpace) {
-				
-				countShape++;
-				shapeValue = shapeValue + countShape;								//Change the shape
-				if(shapeValue > 6){
-					countShape = 1;
-					shapeValue = 1;
-				}
-
-				numOfSpace = 0;								//reset numOfSpace
-			}
-		}
-
-		return 6;
-	}
 
 	private float BlockShape()
 	{
@@ -324,9 +351,9 @@ public class Spawner : MonoBehaviour {
 			spikeSize--;
 			isSpike = !isSpike;
 			if(isSpike)
-				return 3f;
+				return 6f;
 			else
-				return 2f;
+				return 7f;
 		}
 		else
 		{
@@ -339,9 +366,9 @@ public class Spawner : MonoBehaviour {
 		}
 
 		if(isSpike)
-			return 3f;
+			return 6f;
 		else 
-			return 2f;
+			return 7f;
 	}
 		
 
