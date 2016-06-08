@@ -24,8 +24,6 @@ public class Spawner : MonoBehaviour {
 
 	private List<Cube> cubeComponentList;
 
-
-
 	private int cubeAmount;
 	private int InitialCubeNum;
 	private bool isFirst;
@@ -101,14 +99,15 @@ public class Spawner : MonoBehaviour {
 		{
 			if(!cubeList[i].activeInHierarchy)
 			{
+				currShape = ChooseShape();
 				cubeTransList[i].position = new Vector3(xPos, YPosition(), 0f);
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
 				cubeList[i].SetActive(true);
-
+//				currShape = ChooseShape();
 				if(isFirst)
 				{
-					currShape = ChooseShape();
+//					currShape = ChooseShape();
 					if (!isMoveDown || isEmptyShape) {
 						cubeComponentList [i].StartMoveCube (currShape);
 					}
@@ -118,7 +117,7 @@ public class Spawner : MonoBehaviour {
 					}
 				}
 				else{
-					currShape = ChooseShape();
+//					currShape = ChooseShape();
 					if (!isBlockShape || isEmptyShape ) {
 						cubeComponentList [i].StartMoveDown (currShape);
 					}
@@ -150,7 +149,7 @@ public class Spawner : MonoBehaviour {
 		case 3: return BlockShape2();
 		case 4: return VShape();
 		case 5: return VReverseShape();
-		case 6: return BlockShape3();
+		case 6: return Spike();
 
 		default: return EmptyShape();
 		}
@@ -257,7 +256,7 @@ public class Spawner : MonoBehaviour {
 				shapeValue = shapeValue + countShape;								//Change the shape
 				if(shapeValue > 6){
 					countShape = 0;
-					shapeValue = 0;
+					shapeValue = 1;
 				}
 
 				numOfSpace = 0;								//reset numOfSpace
@@ -314,64 +313,40 @@ public class Spawner : MonoBehaviour {
 		return 6;
 	}
 
-	private float BlockShape3()
+
+	private int spikeSize  = 6;
+	private float Spike()
 	{
 		isEmptyShape = false;
 		isBlockShape = false;
 		isMoveDown = true;
+		isZigzag = true;
 
 		if(isFirst )
 		{
-			tallSize--;
-			return 3f;
-		}
-		else
-		{
-			if(tallSize < 0)
-			{
-				shapeValue = 0;
-				tallSize = 3;
-
-			}	
-		}
-
-		return 3;
-	}
-		
-	private float Spike()
-	{
-		isEmptyShape = true;
-		isBlockShape = false;
-		isMoveDown = true;
-		isSpike = true;
-
-		if(isFirst )
-		{
-			tallSize--;
+			spikeSize--;
 			isSpike = !isSpike;
 			if(isSpike)
-				return 6f;
-			else 
 				return 3f;
-			
+			else
+				return 2f;
 		}
 		else
 		{
-			if(tallSize < 0)
+			if(spikeSize < 0)
 			{
 				shapeValue = 0;
-				tallSize = 3;
-				isEmptyShape = false;
-				isMoveDown = false;
+				spikeSize = 6;
 
 			}	
 		}
 
 		if(isSpike)
-			return 6f;
+			return 3f;
 		else 
-			return 5f;
+			return 2f;
 	}
+		
 
 
 	IEnumerator LayoutCube()
