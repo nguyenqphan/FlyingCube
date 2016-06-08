@@ -175,7 +175,6 @@ public class Spawner : MonoBehaviour {
 		}else{
 			if (unit == 0) {
 				shapeValue =0;								//change the shape, exit this function
-				isBlockShape = true;
 			}
 		}
 		return unit;
@@ -229,10 +228,6 @@ public class Spawner : MonoBehaviour {
 		}else{
 			if (unit == 0) {
 				shapeValue =0;								//change the shape, exit this function
-//				isBlockShape = !isBlockShape;
-//				isZigzag = !isZigzag;
-//				isMoveDown = !isMoveDown;
-//				isEmptyShape = false;
 			}
 		}
 		return unit;
@@ -257,7 +252,7 @@ public class Spawner : MonoBehaviour {
 				countShape++;
 				shapeValue = shapeValue + countShape;								//Change the shape
 				if(shapeValue > 6){
-					countShape = 0;
+					countShape = 1;
 					shapeValue = 1;
 				}
 
