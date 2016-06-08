@@ -184,6 +184,7 @@ public class Spawner : MonoBehaviour {
 	private float VReverseShape(){
 		isEmptyShape = false;
 		isBlockShape = true;
+		isMoveDown = false;
 		isZigzag = true;
 		if (isFirst) {
 			if (switchPlusMinus) {
@@ -201,8 +202,8 @@ public class Spawner : MonoBehaviour {
 		}else{
 			if (unit == 0) {
 				shapeValue =0;								//change the shape, exit this function
-				isBlockShape = !isBlockShape;
-				isZigzag = !isZigzag;
+//				isBlockShape = !isBlockShape;
+//				isZigzag = !isZigzag;
 			}
 		}
 		return unit;
@@ -228,10 +229,10 @@ public class Spawner : MonoBehaviour {
 		}else{
 			if (unit == 0) {
 				shapeValue =0;								//change the shape, exit this function
-				isBlockShape = !isBlockShape;
-				isZigzag = !isZigzag;
-				isMoveDown = !isMoveDown;
-				isEmptyShape = false;
+//				isBlockShape = !isBlockShape;
+//				isZigzag = !isZigzag;
+//				isMoveDown = !isMoveDown;
+//				isEmptyShape = false;
 			}
 		}
 		return unit;
@@ -244,6 +245,7 @@ public class Spawner : MonoBehaviour {
 	private float EmptyShape()
 	{
 		isEmptyShape = true;
+		isZigzag = false;
 
 		if (isFirst) {
 			numOfSpace++;
