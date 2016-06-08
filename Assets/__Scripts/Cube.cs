@@ -25,7 +25,7 @@ public class Cube : MonoBehaviour {
 
 		speed = 1f;
 		direction = 1f;
-		isMoving = true;
+		isMoving = true;									//Need this statement to make cubes move
 
 	}
 
@@ -36,6 +36,7 @@ public class Cube : MonoBehaviour {
 
 	IEnumerator MoveCube(float distance)
 	{
+		isMoving = true;
 		startingY = cubeTrans.localPosition.y;
 
 		//condition to fix the bug that the last cube does not position correctly.
@@ -97,6 +98,7 @@ public class Cube : MonoBehaviour {
 
 	IEnumerator MoveDown(float distance)
 	{
+		isMoving = true;									//Need this statement to make Obstacle move
 		startingY = cubeTrans.localPosition.y;
 		while(isMoving)
 		{

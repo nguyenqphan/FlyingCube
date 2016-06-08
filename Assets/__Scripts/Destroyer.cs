@@ -17,11 +17,12 @@ public class Destroyer : MonoBehaviour {
 	{
 		other.gameObject.SetActive(false);
 
-		if(isCollied)
-		{
-			spanwner.StartSpawnCube();
+		if (other.gameObject.CompareTag("Cube")) {
+			if (isCollied) {
+				spanwner.StartSpawnCube ();
+			}
+			
+			isCollied = !isCollied;
 		}
-	
-		isCollied = !isCollied;
 	}
 }

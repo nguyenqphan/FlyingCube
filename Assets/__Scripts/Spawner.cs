@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour {
 	private bool isMoveDown = false;				//Move Cube down when it is true
 	private bool isSpike = false;
 	private float currShape;
+	private float currLine;
+	private bool isObstacle = false;
 
 	private Transform spawnerTrans;
 
@@ -131,10 +133,8 @@ public class Spawner : MonoBehaviour {
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
 				cubeList[i].SetActive(true);
-//				currShape = ChooseShape();
 				if(isFirst)
 				{
-//					currShape = ChooseShape();
 					if (!isMoveDown || isEmptyShape) {
 						cubeComponentList [i].StartMoveCube (currShape);
 					}
@@ -144,7 +144,6 @@ public class Spawner : MonoBehaviour {
 					}
 				}
 				else{
-//					currShape = ChooseShape();
 					if (!isBlockShape || isEmptyShape ) {
 						cubeComponentList [i].StartMoveDown (currShape);
 					}
@@ -162,10 +161,41 @@ public class Spawner : MonoBehaviour {
 			}
 		}
 
+
+		if(isObstacle){
+			xPos--;
+			for(int i =0; i < smallCubeList.Count; i++)
+			{
+				if(!smallCubeList[i].activeInHierarchy)
+				{
+					smallCubeTransList[i].position = new Vector3(xPos, YSmallPosition(), 0f);
+					smallCubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+
+					smallCubeList[i].SetActive(true);
+
+					if(isFirst){
+						smallCubeComponentList[i].StartMoveCube(isStraight? StraigtLine() :PatternPosition());
+					}else{
+						smallCubeComponentList[i].StartMoveDown(isStraight? StraigtLine() :PatternPosition());
+					}
+
+					isFirst = !isFirst;
+					if(isFirst){
+						xPos++;
+						GameManager.Instance.NumSpawnedCube += 2;
+
+						break;
+					}
+
+				}
+			}
+		}
+
+		isObstacle = false;
 		yield return 0;
 	}
 
-	private int shapeValue = 0;
+	private int shapeValue = 8;
 	private float ChooseShape()
 	{
 		switch(shapeValue)
@@ -178,7 +208,7 @@ public class Spawner : MonoBehaviour {
 		case 5: return Spike();
 		case 6: return VReverseShape();
 		case 7: return BlockShape();
-
+		case 8: return ObstacleShape();
 		default: return EmptyShape();
 		}
 	}
@@ -199,11 +229,15 @@ public class Spawner : MonoBehaviour {
 
 				countShape++;
 				shapeValue = shapeValue + countShape;								//Change the shape
-				if(shapeValue > 7){
+				if(shapeValue > 8){
 					countShape = 1;
 					shapeValue = 1;
 				}
 
+				if(shapeValue == 8)
+				{
+					isStraight = !isStraight;
+				}
 				numOfSpace = 0;								//reset numOfSpace
 			}
 		}
@@ -256,8 +290,6 @@ public class Spawner : MonoBehaviour {
 		}else{
 			if (unit == 0) {
 				shapeValue =0;								//change the shape, exit this function
-//				isBlockShape = !isBlockShape;
-//				isZigzag = !isZigzag;
 			}
 		}
 		return unit;
@@ -373,6 +405,59 @@ public class Spawner : MonoBehaviour {
 		
 
 
+	private int numOfSpace1 = 0;
+	private int maxSpace1 = 15;
+	private int countShape1 = 0;
+	private float ObstacleShape()
+	{
+		isEmptyShape = true;
+		isZigzag = false;
+		isObstacle = true;
+		if (isFirst) {
+			numOfSpace1++;
+		}
+		else{
+			if (numOfSpace1 > maxSpace1) {
+				shapeValue = 0;	
+				numOfSpace1 = 0;								//reset numOfSpace
+			}
+		}
+
+		return 4;
+	}
+
+	private int countPat  = 0;
+	private int countPattern = 0;
+	private bool isPattern;
+	private float PatternPosition()
+	{	
+		if (isFirst) {
+			countPat++;
+
+			if(countPat % 3 == 0)
+			{
+				countPattern++;
+			}
+//			isPattern = !isPattern;
+			if (countPattern % 2 == 0)
+				return 2f;
+			else
+				return 3f;
+		}
+		else{
+			if (countPattern % 2 == 0)
+				return 2f;
+			else
+				return 3f;
+		}
+	}
+
+	private bool isStraight = true;
+	private float StraigtLine()
+	{
+		return 2f;	
+	}
+
 	IEnumerator LayoutCube()
 	{
 		for(int i = 0; i < InitialCubeNum; i += 2)
@@ -397,16 +482,22 @@ public class Spawner : MonoBehaviour {
 
 		if(isFirst)
 		{
-			if(isZigzag)
+			if(isZigzag || isObstacle)
 				return 13f;
 			else
 				return 12f;
 		}
 		else{
-			if(isZigzag)
+			if(isZigzag || isObstacle)
 				return -13f;
 			else
 				return -12f;
 		}
+	}
+
+	private float YSmallPosition()
+	{
+
+		return 0;
 	}
 }
