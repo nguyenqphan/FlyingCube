@@ -8,36 +8,36 @@ public class Spawner : MonoBehaviour {
 	private bool isEmptyShape = false;				//EmptyShape() is is progress
 	private bool isZigzag = false;					//Control the initial position. Make the distance bigger	
 	private bool isMoveDown = false;				//Move Cube down when it is true
-	private bool isSpike = false;
-	private float currShape;
-	private float currLine;
-	private bool isObstacle = false;
+	private bool isSpike = false;					//Controle the spike shape
+	private float currShape;						//Store the value of the current shape
+	private float currLine;							//Store the value of the current line
+	private bool isObstacle = false;				//if obstacle is on, create another the line in the mid
 
-	private Transform spawnerTrans;
+	private Transform spawnerTrans;					//reference to the Transform component
+		
+	public GameObject cube;							//reference to the Long Cube prefab
+	public GameObject smallCube;					//reference to the small cube prefab	
 
-	public GameObject cube;
-	public GameObject smallCube;
+	private Cube cubeComponent;						//reference to the Long Cube script
+	private Cube smallCubeComponent;				//refernce to the small Cube script
 
-	private Cube cubeComponent;
-	private Cube smallCubeComponent;
+	private Transform cubeTrans;					//reference to the transform of the long cube script
+	private Transform smallCubeTrans;				//reference to the transform of the small cube script
 
-	private Transform cubeTrans;
-	private Transform smallCubeTrans;
+	private List<GameObject> cubeList;				//Store long cubes in a list
+	private List<GameObject> smallCubeList;			//Store small cubes in a list 
 
-	private List<GameObject> cubeList;
-	private List<GameObject> smallCubeList;
+	private List<Transform> cubeTransList;			//Store transform components of long cubes in a list
+	private List<Transform> smallCubeTransList;		//Store transform components of small cubes in a list
 
-	private List<Transform> cubeTransList;
-	private List<Transform> smallCubeTransList;
+	private List<Cube> cubeComponentList;			//Store the cube components of long cubes in a list
+	private List<Cube> smallCubeComponentList;		//Store the cube components of small cubes in a list
 
-	private List<Cube> cubeComponentList;
-	private List<Cube> smallCubeComponentList;
+	private int cubeAmount;							//The amount of long and small cubes to generate
+	private int InitialCubeNum;						
+	private bool isFirst;							//Refernce to the first cube to instantiate out two.
 
-	private int cubeAmount;
-	private int InitialCubeNum;
-	private bool isFirst;
-
-	private int xPos;
+	private int xPos;								
 	private int yPos = 0;
 
 	private float unit = 0f;
