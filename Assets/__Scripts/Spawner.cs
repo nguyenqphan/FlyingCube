@@ -498,6 +498,9 @@ public class Spawner : MonoBehaviour {
 	private float YSmallPosition()
 	{
 
-		return 0;
+		if(isFirst)
+			return 1;
+		else
+			return -1;
 	}
 }
