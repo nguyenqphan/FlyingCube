@@ -16,23 +16,30 @@ public class Spawner : MonoBehaviour {
 	private Transform spawnerTrans;					//reference to the Transform component
 		
 	public GameObject cube;							//reference to the Long Cube prefab
-	public GameObject smallCube;					//reference to the small cube prefab	
+	public GameObject smallCube;					//reference to the small cube prefab
+	public GameObject tinyCube;
 
 	private Cube cubeComponent;						//reference to the Long Cube script
 	private Cube smallCubeComponent;				//refernce to the small Cube script
+	private Cube tinyCubeComponent;
 
 	private Transform cubeTrans;					//reference to the transform of the long cube script
 	private Transform smallCubeTrans;				//reference to the transform of the small cube script
+	private Transform tinyCubeTrans;
 
 	private List<GameObject> cubeList;				//Store long cubes in a list
 	private List<GameObject> smallCubeList;			//Store small cubes in a list 
+	private List<GameObject> tinyCubeList;
 
 	private List<Transform> cubeTransList;			//Store transform components of long cubes in a list
 	private List<Transform> smallCubeTransList;		//Store transform components of small cubes in a list
+	private List<Transform> tinyCubeTransList;
 
 	private List<Cube> cubeComponentList;			//Store the cube components of long cubes in a list
 	private List<Cube> smallCubeComponentList;		//Store the cube components of small cubes in a list
+	private List<Cube> tinyCubeComponentList;
 
+	private int tinyCubeAmount;
 	private int cubeAmount;							//The amount of long and small cubes to generate
 	private int InitialCubeNum;						
 	private bool isFirst;							//Refernce to the first cube to instantiate out two.
@@ -58,6 +65,7 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cubeAmount = 40;
+		tinyCubeAmount = 20;
 		InitialCubeNum = 32;
 		isFirst = true;
 
@@ -65,12 +73,15 @@ public class Spawner : MonoBehaviour {
 
 		cubeList = new List<GameObject>();
 		smallCubeList = new List<GameObject>();
+		tinyCubeList = new List<GameObject>();
 
 		cubeTransList = new List<Transform>();
 		smallCubeTransList = new List<Transform>();
+		tinyCubeTransList = new List<Transform>();
 
 		cubeComponentList = new List<Cube>();
 		smallCubeComponentList = new List<Cube>();
+		tinyCubeComponentList = new List<Cube>();
 
 		for(int i = 0; i < cubeAmount; i++)
 		{
@@ -106,6 +117,25 @@ public class Spawner : MonoBehaviour {
 			smallCubeComponent = newSmallCube.GetComponent<Cube>();
 			smallCubeComponentList.Add(smallCubeComponent);
 		}
+
+		for(int i = 0; i < tinyCubeAmount; i++)
+		{
+			GameObject newTinyCube = Instantiate(tinyCube, spawnerTrans.position, Quaternion.identity) as GameObject;
+
+			newTinyCube.transform.parent = spawnerTrans;
+
+			newTinyCube.SetActive(false);
+
+			tinyCubeList.Add(newTinyCube);
+
+			tinyCubeTrans = newTinyCube.GetComponent<Transform>();
+			tinyCubeTransList.Add(tinyCubeTrans);
+
+			tinyCubeComponent = newTinyCube.GetComponent<Cube>();
+			tinyCubeComponentList.Add(smallCubeComponent);
+		}
+
+
 
 		StartCoroutine(LayoutCube());
 	}
