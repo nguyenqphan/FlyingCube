@@ -65,7 +65,7 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cubeAmount = 40;
-		tinyCubeAmount = 20;
+		tinyCubeAmount = 40;
 		InitialCubeNum = 32;
 		isFirst = true;
 
@@ -132,7 +132,7 @@ public class Spawner : MonoBehaviour {
 			tinyCubeTransList.Add(tinyCubeTrans);
 
 			tinyCubeComponent = newTinyCube.GetComponent<Cube>();
-			tinyCubeComponentList.Add(smallCubeComponent);
+			tinyCubeComponentList.Add(tinyCubeComponent);
 		}
 
 
@@ -221,11 +221,42 @@ public class Spawner : MonoBehaviour {
 			}
 		}
 
+		if(isMidLineShape){
+			xPos--;
+			for(int i =0; i < tinyCubeList.Count; i++)
+			{
+				if(!tinyCubeList[i].activeInHierarchy)
+				{
+					tinyCubeTransList[i].position = new Vector3(xPos, YSmallPosition(), 0f);
+					tinyCubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+
+					tinyCubeList[i].SetActive(true);
+
+					if(isFirst){
+						tinyCubeComponentList[i].StartMoveCube(DeadLine());
+					}else{
+						tinyCubeComponentList[i].StartMoveDown(DeadLine());
+					}
+
+					isFirst = !isFirst;
+					if(isFirst){
+						xPos++;
+						GameManager.Instance.NumSpawnedCube += 2;
+
+						break;
+					}
+
+				}
+			}
+		}
+
+
+		isMidLineShape = false;
 		isObstacle = false;
 		yield return 0;
 	}
 
-	private int shapeValue = 8;
+	private int shapeValue = 0;
 	private float ChooseShape()
 	{
 		switch(shapeValue)
@@ -239,6 +270,8 @@ public class Spawner : MonoBehaviour {
 		case 6: return VReverseShape();
 		case 7: return BlockShape();
 		case 8: return ObstacleShape();
+		case 9: return Spike();
+		case 10: return MidLineShape();
 		default: return EmptyShape();
 		}
 	}
@@ -259,7 +292,7 @@ public class Spawner : MonoBehaviour {
 
 				countShape++;
 				shapeValue = shapeValue + countShape;								//Change the shape
-				if(shapeValue > 8){
+				if(shapeValue > 10){
 					countShape = 1;
 					shapeValue = 1;
 				}
@@ -488,6 +521,35 @@ public class Spawner : MonoBehaviour {
 		return 2f;	
 	}
 
+	private float DeadLine()
+	{
+		if(isFirst)
+			return 2f;
+		else 
+			return 1f;
+	}
+
+	private bool isMidLineShape;
+	private float MidLineShape()
+	{
+
+		Debug.Log("Here");
+		isEmptyShape = true;
+		isZigzag = false;
+		isMidLineShape = true;
+		isObstacle = false;
+		if (isFirst) {
+			numOfSpace1++;
+		}
+		else{
+			if (numOfSpace1 > maxSpace1) {
+				shapeValue = 0;	
+				numOfSpace1 = 0;								//reset numOfSpace
+			}
+		}
+
+		return 2;
+	}
 	IEnumerator LayoutCube()
 	{
 		for(int i = 0; i < InitialCubeNum; i += 2)
@@ -528,9 +590,18 @@ public class Spawner : MonoBehaviour {
 	private float YSmallPosition()
 	{
 
-		if(isFirst)
-			return 1;
-		else
-			return -1;
+		if(isFirst){
+			if(isMidLineShape)
+				return 0;
+			else
+				return 1;
+			
+		}
+		else{
+				return -1;
+		}
 	}
+
+
+
 }
