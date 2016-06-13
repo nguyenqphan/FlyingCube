@@ -191,6 +191,47 @@ public class Spawner : MonoBehaviour {
 			}
 		}
 
+		if(isExtented)
+		{
+			xPos--;
+			for(int i = 0; i < tinyCubeList.Count; i++)
+			{
+				if(!tinyCubeList[i].activeInHierarchy)
+				{
+//					currShape = ChooseShape();
+					tinyCubeTransList[i].position = new Vector3(xPos, YSmallPosition(), 0f);
+					tinyCubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+
+					tinyCubeList[i].SetActive(true);
+					if(isFirst)
+					{
+						if (!isMoveDown || isEmptyShape) {
+							tinyCubeComponentList [i].StartMoveCube (currShape);
+						}
+						else{
+							tinyCubeComponentList [i].StartMoveDown (currShape);
+
+						}
+					}
+					else{
+						if (!isBlockShape || isEmptyShape ) {
+							tinyCubeComponentList [i].StartMoveDown (currShape);
+						}
+						else{
+							tinyCubeComponentList[i].StartMoveCube(currShape);
+						}
+					}
+
+					isFirst = !isFirst;
+					if(isFirst){
+						xPos++;
+						GameManager.Instance.NumSpawnedCube += 2;
+						break;
+					}
+				}
+			}
+		}
+
 
 		if(isObstacle){
 			xPos--;
@@ -253,10 +294,11 @@ public class Spawner : MonoBehaviour {
 
 		isMidLineShape = false;
 		isObstacle = false;
+		isExtented = false;
 		yield return 0;
 	}
 
-	private int shapeValue = 0;
+	private int shapeValue = 14;
 	private float ChooseShape()
 	{
 		switch(shapeValue)
@@ -274,7 +316,9 @@ public class Spawner : MonoBehaviour {
 		case 10: return VShape2();
 		case 11: return BlockShape();
 		case 12: return VReverseShape2();
-		case 13: return MidLineShape();
+		case 13: return VReverseShape3();
+		case 14: return VShape3();	
+		case 15: return MidLineShape();				//Deadly Shape
 			
 		default: return EmptyShape();
 		}
@@ -296,7 +340,7 @@ public class Spawner : MonoBehaviour {
 
 				countShape++;
 				shapeValue = shapeValue + countShape;								//Change the shape
-				if(shapeValue > 13){
+				if(shapeValue > 15){
 					countShape = 1;
 					shapeValue = 1;
 				}
@@ -374,7 +418,7 @@ public class Spawner : MonoBehaviour {
 				unit = unit + 1f;
 				if(unit == 6)
 				{	
-					if(flatUnit < 7)
+					if(flatUnit < 17)
 					{
 						unit--;
 						flatUnit++;
@@ -394,7 +438,7 @@ public class Spawner : MonoBehaviour {
 				unit = unit - 1f;
 				if(unit == 4)
 				{	
-					if(flatUnit < 8)
+					if(flatUnit < 18)
 					{
 						unit++;
 						flatUnit++;
@@ -419,9 +463,36 @@ public class Spawner : MonoBehaviour {
 		return unit;
 	}
 
+	private float VReverseShape3(){
+		isEmptyShape = false;
+		isBlockShape = true;
+		isMoveDown = false;
+		isZigzag = true;
+		if (isFirst) {
+			if (switchPlusMinus) {
+				unit = unit + 1f;
+				if (unit > 5f) {
+					switchPlusMinus = !switchPlusMinus;
+				}
+			} else {
+				unit = unit - 1f;
+				if (unit  == 0) {
+					switchPlusMinus = !switchPlusMinus;
+
+				}
+			}
+		}else{
+			if (unit == 0) {
+				shapeValue =0;								//change the shape, exit this function
+			}
+		}
+		return unit;
+	}
+
 	private float VShape(){
 		isMoveDown = true;
 		isEmptyShape = false;
+		isBlockShape = false;
 		isZigzag = true;
 		if (isFirst) {
 			if (switchPlusMinus) {
@@ -446,6 +517,8 @@ public class Spawner : MonoBehaviour {
 	}
 
 	private float VShape2(){
+
+
 		isMoveDown = true;
 		isEmptyShape = false;
 		isZigzag = true;
@@ -454,7 +527,7 @@ public class Spawner : MonoBehaviour {
 				unit = unit + 1f;
 				if(unit == 6)
 				{	
-					if(flatUnit < 7)
+					if(flatUnit < 17)
 					{
 						unit--;
 						flatUnit++;
@@ -473,7 +546,7 @@ public class Spawner : MonoBehaviour {
 				unit = unit - 1f;
 				if(unit == 4)
 				{	
-					if(flatUnit < 8)
+					if(flatUnit < 18)
 					{
 						unit++;
 						flatUnit++;
@@ -498,7 +571,48 @@ public class Spawner : MonoBehaviour {
 		return unit;
 	}
 		
+	private bool isExtented = false;
+	private bool isDouble = false;
+	private float VShape3(){
+		Debug.Log("Vshape3");
+		isMoveDown = true;
+		isEmptyShape = false;
+		isBlockShape = false;
+		isZigzag = true;
+		isExtented = true;
+		if (isFirst) {
+			if (switchPlusMinus) {
+				if (!isDouble) {
+					unit = unit + 1f;
+					isDouble = !isDouble;
+					Debug.Log("Plus");
+				}else{
+					isDouble = !isDouble;
+				}
 
+				if (unit > 3f) {
+					switchPlusMinus = !switchPlusMinus;
+					Debug.Log("Switch");
+				}
+			} else {
+				if (!isDouble) {
+					unit = unit - 1f;
+					isDouble = !isDouble;
+				}else{
+					isDouble = !isDouble;
+				}
+				if (unit  == 0) {
+					switchPlusMinus = !switchPlusMinus;
+
+				}
+			}
+		}else{
+			if (unit == 0) {
+				shapeValue =0;								//change the shape, exit this function
+			}
+		}
+		return unit;
+	}
 
 	private float BlockShape()
 	{
@@ -689,16 +803,25 @@ public class Spawner : MonoBehaviour {
 
 		if(isFirst)
 		{
-			if(isZigzag || isObstacle)
-				return 13f;
-			else
-				return 12f;
+			if (!isExtented) {
+				if (isZigzag || isObstacle)
+					return 13f;
+				else
+					return 12f;
+			}else{
+				return 16f;
+			}
 		}
 		else{
-			if(isZigzag || isObstacle)
-				return -13f;
-			else
-				return -12f;
+			if (!isExtented) {
+				if (isZigzag || isObstacle)
+					return -13f;
+				else
+					return -12f;
+			}
+			else{
+				return -16f;
+			}
 		}
 	}
 
@@ -706,14 +829,22 @@ public class Spawner : MonoBehaviour {
 	{
 
 		if(isFirst){
-			if(isMidLineShape)
-				return 0;
-			else
-				return 1;
+			if (!isExtented) {
+				if (isMidLineShape)
+					return 0;
+				else
+					return 1;
+			}else{
+				return 3f;
+			}
 			
 		}
 		else{
+			if (!isExtented) {
 				return -1;
+			}else{
+				return -3f;
+			}
 		}
 	}
 
