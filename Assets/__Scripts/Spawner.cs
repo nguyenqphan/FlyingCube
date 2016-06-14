@@ -156,7 +156,7 @@ public class Spawner : MonoBehaviour {
 			tinyCubeComponentList.Add(tinyCubeComponent);
 
 			tinyCubeSkinComponent = newTinyCube.GetComponent<TinyCubeSkin>();
-			tinyCubeSkinComponentList.Add(tinyCubeComponent);
+			tinyCubeSkinComponentList.Add(tinyCubeSkinComponent);
 		}
 
 
