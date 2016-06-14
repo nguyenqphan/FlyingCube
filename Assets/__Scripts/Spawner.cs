@@ -468,7 +468,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	private float VReverseShape3(){
-		Debug.Log("VReverseshape3");
+//		Debug.Log("VReverseshape3");
 		isEmptyShape = false;
 		isBlockShape = true;
 		isMoveDown = false;
@@ -480,14 +480,14 @@ public class Spawner : MonoBehaviour {
 				if (!isDouble) {
 					unit = unit + 1f;
 					isDouble = !isDouble;
-					Debug.Log("Plus");
+//					Debug.Log("Plus");
 				}else{
 					isDouble = !isDouble;
 				}
 
 				if (unit > 3f) {
 					switchPlusMinus = !switchPlusMinus;
-					Debug.Log("Switch");
+//					Debug.Log("Switch");
 				}
 			} else {
 				if (!isDouble) {
@@ -670,7 +670,7 @@ public class Spawner : MonoBehaviour {
 		if(isFirst )
 		{
 			tallSize--;
-			return 6f;
+			return 5f;
 		}
 		else
 		{
@@ -683,7 +683,7 @@ public class Spawner : MonoBehaviour {
 
 
 
-		return 6;
+		return 5;
 	}
 
 
