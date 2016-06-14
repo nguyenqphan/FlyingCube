@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 
+//	public Shader shader1;
+
 	private bool isBlockShape = false;				//Move Cube Up when it is true;
 	private bool isEmptyShape = false;				//EmptyShape() is is progress
 	private bool isZigzag = false;					//Control the initial position. Make the distance bigger	
@@ -23,6 +25,10 @@ public class Spawner : MonoBehaviour {
 	private Cube smallCubeComponent;				//refernce to the small Cube script
 	private Cube tinyCubeComponent;
 
+	private CubeSkin cubeSkinComponent;
+	private SmallCubeSkin smallCubeSkinComponent;
+	private TinyCubeSkin tinyCubeSkinComponent;
+
 	private Transform cubeTrans;					//reference to the transform of the long cube script
 	private Transform smallCubeTrans;				//reference to the transform of the small cube script
 	private Transform tinyCubeTrans;
@@ -38,6 +44,10 @@ public class Spawner : MonoBehaviour {
 	private List<Cube> cubeComponentList;			//Store the cube components of long cubes in a list
 	private List<Cube> smallCubeComponentList;		//Store the cube components of small cubes in a list
 	private List<Cube> tinyCubeComponentList;
+
+	private List<CubeSkin> cubeSkinComponentList;
+	private List<SmallCubeSkin> smallCubeSkinComponentList;
+	private List<TinyCubeSkin> tinyCubeSkinComponentList;
 
 	private int tinyCubeAmount;
 	private int cubeAmount;							//The amount of long and small cubes to generate
@@ -83,6 +93,11 @@ public class Spawner : MonoBehaviour {
 		smallCubeComponentList = new List<Cube>();
 		tinyCubeComponentList = new List<Cube>();
 
+		cubeSkinComponentList = new List<CubeSkin>();
+		smallCubeSkinComponentList = new List<SmallCubeSkin>();
+		tinyCubeSkinComponentList = new List<TinyCubeSkin>();
+
+
 		for(int i = 0; i < cubeAmount; i++)
 		{
 			GameObject newCube = Instantiate(cube, spawnerTrans.position, Quaternion.identity) as GameObject;
@@ -98,6 +113,9 @@ public class Spawner : MonoBehaviour {
 
 			cubeComponent = newCube.GetComponent<Cube>();
 			cubeComponentList.Add(cubeComponent);
+
+			cubeSkinComponent = newCube.GetComponent<CubeSkin>();
+			cubeSkinComponentList.Add(cubeSkinComponent);
 
 		}
 
@@ -116,6 +134,9 @@ public class Spawner : MonoBehaviour {
 
 			smallCubeComponent = newSmallCube.GetComponent<Cube>();
 			smallCubeComponentList.Add(smallCubeComponent);
+
+			smallCubeSkinComponent = newSmallCube.GetComponent<SmallCubeSkin>();
+			smallCubeSkinComponentList.Add(smallCubeSkinComponent);
 		}
 
 		for(int i = 0; i < tinyCubeAmount; i++)
@@ -133,6 +154,9 @@ public class Spawner : MonoBehaviour {
 
 			tinyCubeComponent = newTinyCube.GetComponent<Cube>();
 			tinyCubeComponentList.Add(tinyCubeComponent);
+
+			tinyCubeSkinComponent = newTinyCube.GetComponent<TinyCubeSkin>();
+			tinyCubeSkinComponentList.Add(tinyCubeComponent);
 		}
 
 
@@ -162,9 +186,12 @@ public class Spawner : MonoBehaviour {
 				cubeTransList[i].position = new Vector3(xPos, YPosition(), 0f);
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
+
+
 				cubeList[i].SetActive(true);
 				if(isFirst)
 				{
+					cubeSkinComponentList[i].ChooseColor(0);
 					if (!isMoveDown || isEmptyShape) {
 						cubeComponentList [i].StartMoveCube (currShape);
 					}
@@ -174,6 +201,7 @@ public class Spawner : MonoBehaviour {
 					}
 				}
 				else{
+					cubeSkinComponentList[i].ChooseColor(1);
 					if (!isBlockShape || isEmptyShape ) {
 						cubeComponentList [i].StartMoveDown (currShape);
 					}

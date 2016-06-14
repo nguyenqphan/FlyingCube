@@ -47,11 +47,15 @@
   <ItemGroup>
      <Compile Include="Assets\__Scripts\CameraMove.cs" />
      <Compile Include="Assets\__Scripts\Cube.cs" />
+     <Compile Include="Assets\__Scripts\CubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Destroyer.cs" />
+     <Compile Include="Assets\__Scripts\ExampleClass.cs" />
      <Compile Include="Assets\__Scripts\GameManager.cs" />
      <Compile Include="Assets\__Scripts\Player.cs" />
      <Compile Include="Assets\__Scripts\Singleton.cs" />
+     <Compile Include="Assets\__Scripts\SmallCubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Spawner.cs" />
+     <Compile Include="Assets\__Scripts\TinyCubeSkin.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
