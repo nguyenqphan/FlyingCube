@@ -18,7 +18,7 @@ public class CubeSkin : MonoBehaviour {
 
 	public void ChooseColor(int colorNum)
 	{
-		Debug.Log(colorNum);
+//		Debug.Log(colorNum);
 		render.sharedMaterial.color = colors[colorNum];
 	}
 
