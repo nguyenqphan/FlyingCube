@@ -11,13 +11,25 @@ public class GameManager : Singleton<GameManager> {
 		set{numSpawnedCube = value;}
 	}
 
+	private int smallCubeColorNum = 0;
+
+	public int SmallCubeColorNum
+	{
+		get{return smallCubeColorNum;}
+		set{smallCubeColorNum = value;}
+	}
+
+	private int tinyCubeColorNum = 0;
+
+	public int TinyCubeColorNum
+	{
+		get{return tinyCubeColorNum;}
+		set{tinyCubeColorNum = value;}
+	}
+
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		SmallCubeColorNum = Random.Range(0, 24);
+		TinyCubeColorNum = Random.Range(0, 24);
 	}
 }

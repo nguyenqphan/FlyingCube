@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour {
 
 	private CubeSkin cubeSkinComponent;
 	private SmallCubeSkin smallCubeSkinComponent;
-	private TinyCubeSkin tinyCubeSkinComponent;
+	private SmallCubeSkin tinyCubeSkinComponent;
 
 	private Transform cubeTrans;					//reference to the transform of the long cube script
 	private Transform smallCubeTrans;				//reference to the transform of the small cube script
@@ -48,7 +48,7 @@ public class Spawner : MonoBehaviour {
 
 	private List<CubeSkin> cubeSkinComponentList;
 	private List<SmallCubeSkin> smallCubeSkinComponentList;
-	private List<TinyCubeSkin> tinyCubeSkinComponentList;
+	private List<SmallCubeSkin> tinyCubeSkinComponentList;
 
 	private int tinyCubeAmount;
 	private int cubeAmount;							//The amount of long and small cubes to generate
@@ -96,7 +96,7 @@ public class Spawner : MonoBehaviour {
 
 		cubeSkinComponentList = new List<CubeSkin>();
 		smallCubeSkinComponentList = new List<SmallCubeSkin>();
-		tinyCubeSkinComponentList = new List<TinyCubeSkin>();
+		tinyCubeSkinComponentList = new List<SmallCubeSkin>();
 
 
 		for(int i = 0; i < cubeAmount; i++)
@@ -156,13 +156,13 @@ public class Spawner : MonoBehaviour {
 			tinyCubeComponent = newTinyCube.GetComponent<Cube>();
 			tinyCubeComponentList.Add(tinyCubeComponent);
 
-			tinyCubeSkinComponent = newTinyCube.GetComponent<TinyCubeSkin>();
+			tinyCubeSkinComponent = newTinyCube.GetComponent<SmallCubeSkin>();
 			tinyCubeSkinComponentList.Add(tinyCubeSkinComponent);
 		}
 
 
-		colorNum = Random.Range(0,10);
-		CubeMatNum = Random.Range(0,10);
+		colorNum = Random.Range(0,24);
+		CubeMatNum = Random.Range(0,24);
 
 		StartCoroutine(LayoutCube());
 	}
@@ -202,7 +202,7 @@ public class Spawner : MonoBehaviour {
 					}
 				}
 				else{
-					if(GameManager.Instance.NumSpawnedCube % 2== 0)
+					if(GameManager.Instance.NumSpawnedCube % 2== 0 && GameManager.Instance.NumSpawnedCube > 50)
 					{
 //						CubeMatNum = RandomOneColor();
 						CubeMatNum = twoColorSwitch();
@@ -234,8 +234,12 @@ public class Spawner : MonoBehaviour {
 //					currShape = ChooseShape();
 					tinyCubeTransList[i].position = new Vector3(xPos, YSmallPosition(), 0f);
 					tinyCubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+					tinyCubeSkinComponentList[i].ChooseColor(GameManager.Instance.TinyCubeColorNum);
 
 					tinyCubeList[i].SetActive(true);
+
+
+
 					if(isFirst)
 					{
 						if (!isMoveDown || isEmptyShape) {
@@ -274,6 +278,7 @@ public class Spawner : MonoBehaviour {
 				{
 					smallCubeTransList[i].position = new Vector3(xPos, YSmallPosition(), 0f);
 					smallCubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+					smallCubeSkinComponentList[i].ChooseColor(GameManager.Instance.SmallCubeColorNum);
 
 					smallCubeList[i].SetActive(true);
 
@@ -303,6 +308,8 @@ public class Spawner : MonoBehaviour {
 				{
 					tinyCubeTransList[i].position = new Vector3(xPos, YSmallPosition(), 0f);
 					tinyCubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+
+					tinyCubeSkinComponentList[i].ChooseColor(GameManager.Instance.TinyCubeColorNum);
 
 					tinyCubeList[i].SetActive(true);
 
@@ -842,14 +849,16 @@ public class Spawner : MonoBehaviour {
 		for(int i = 0; i < InitialCubeNum; i += 2)
 		{
 
-			cubeTransList[i].position = new Vector3(xPos, yPos + 20f, 0f);
+			cubeTransList[i].position = new Vector3(xPos, yPos + 17f, 0f);
 			cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+			cubeSkinComponentList[i].ChooseColor(CubeMatNum);
+
 
 			cubeList[i].SetActive(true);
 
-			cubeTransList[i + 1].position =  new Vector3(xPos, yPos - 20f, 0f);
+			cubeTransList[i + 1].position =  new Vector3(xPos, yPos - 17f, 0f);
 			cubeTransList[i + 1].rotation = Quaternion.Euler(0f,0f,0f);
-
+			cubeSkinComponentList[i + 1].ChooseColor(CubeMatNum);
 			cubeList[i + 1].SetActive(true);
 			xPos++;
 			yield return 0;
@@ -935,6 +944,6 @@ public class Spawner : MonoBehaviour {
 
 	private int RandomOneColor()
 	{
-		return Random.Range(0,10);
+		return Random.Range(0,24);
 	}
 }
