@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameManager : Singleton<GameManager> {
 
-	private int numSpawnedCube = 0;
+	private int numSpawnedCube = 2;
 
 	public int NumSpawnedCube
 	{

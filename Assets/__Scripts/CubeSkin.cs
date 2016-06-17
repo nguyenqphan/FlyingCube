@@ -4,7 +4,7 @@ using System.Collections;
 public class CubeSkin : MonoBehaviour {
 
 	private Renderer render;
-	public Color[] colors;
+	public Material[] materials;
 //	public Material[] materials;
 
 	void Awake()
@@ -16,10 +16,10 @@ public class CubeSkin : MonoBehaviour {
 	{
 	}
 
-	public void ChooseColor(int colorNum)
+	public void ChooseColor(int matIndex)
 	{
 //		Debug.Log(colorNum);
-		render.sharedMaterial.color = colors[colorNum];
+		render.sharedMaterial = materials[matIndex];
 	}
 
 

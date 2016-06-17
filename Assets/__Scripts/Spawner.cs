@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 
-//	public Shader shader1;
+	private int CubeMatNum;
+	private int currentColor;
 
 	private bool isBlockShape = false;				//Move Cube Up when it is true;
 	private bool isEmptyShape = false;				//EmptyShape() is is progress
@@ -76,7 +77,7 @@ public class Spawner : MonoBehaviour {
 	void Start () {
 		cubeAmount = 40;
 		tinyCubeAmount = 40;
-		InitialCubeNum = 32;
+		InitialCubeNum = 34;
 		isFirst = true;
 
 		tallSize = 3;
@@ -160,15 +161,10 @@ public class Spawner : MonoBehaviour {
 		}
 
 
+		colorNum = Random.Range(0,10);
+		CubeMatNum = Random.Range(0,10);
 
 		StartCoroutine(LayoutCube());
-	}
-
-	void Update()
-	{
-		if(Input.GetButtonDown("Fire1"))
-		{
-		}
 	}
 
 	public void StartSpawnCube()
@@ -186,12 +182,17 @@ public class Spawner : MonoBehaviour {
 				cubeTransList[i].position = new Vector3(xPos, YPosition(), 0f);
 				cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 
-
-
 				cubeList[i].SetActive(true);
+
+//				CubeMatNum = twoColorSwitch();
+
+
+				cubeSkinComponentList[i].ChooseColor(CubeMatNum);
 				if(isFirst)
 				{
-					cubeSkinComponentList[i].ChooseColor(0);
+					
+
+
 					if (!isMoveDown || isEmptyShape) {
 						cubeComponentList [i].StartMoveCube (currShape);
 					}
@@ -201,7 +202,11 @@ public class Spawner : MonoBehaviour {
 					}
 				}
 				else{
-					cubeSkinComponentList[i].ChooseColor(1);
+					if(GameManager.Instance.NumSpawnedCube % 2== 0)
+					{
+//						CubeMatNum = RandomOneColor();
+						CubeMatNum = twoColorSwitch();
+					}
 					if (!isBlockShape || isEmptyShape ) {
 						cubeComponentList [i].StartMoveDown (currShape);
 					}
@@ -636,14 +641,14 @@ public class Spawner : MonoBehaviour {
 				if (!isDouble) {
 					unit = unit + 1f;
 					isDouble = !isDouble;
-					Debug.Log("Plus");
+//					Debug.Log("Plus");
 				}else{
 					isDouble = !isDouble;
 				}
 
 				if (unit > 3f) {
 					switchPlusMinus = !switchPlusMinus;
-					Debug.Log("Switch");
+//					Debug.Log("Switch");
 				}
 			} else {
 				if (!isDouble) {
@@ -901,6 +906,35 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
+	private bool isTwoColorSwitch = true;
+	private int countCube = 1;
+	private int colorNum = 1;
+	private int numOfSwitches = 0;
+	private int twoColorSwitch()
+	{
+//		countCube++;
+//		if(countCube % 2 == 0){
+//			isTwoColorSwitch = !isTwoColorSwitch;
+//
+//		}
+		numOfSwitches++;
+		if(numOfSwitches > 24)
+		{
+			numOfSwitches = 0;
+			colorNum = RandomOneColor();
+		}
+		isTwoColorSwitch = !isTwoColorSwitch;
+		if(isTwoColorSwitch){
+			return colorNum;
+		}else{
+			
+			return colorNum + 1;
+		}
+	}
 
 
+	private int RandomOneColor()
+	{
+		return Random.Range(0,10);
+	}
 }

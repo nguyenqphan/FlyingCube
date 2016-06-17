@@ -12,6 +12,6 @@ public class ExampleClass : MonoBehaviour {
 	void Update() {
 		float lerp = Mathf.PingPong(Time.time, duration) / duration;
 //		rend.material.color = Color.Lerp(colorStart, colorEnd, lerp);
-		rend.sharedMaterial.color = Color.Lerp(colorStart, colorEnd, lerp);
+		rend.sharedMaterial.color = Color.Lerp(colorStart, colorEnd, lerp);	
 	}
 }
