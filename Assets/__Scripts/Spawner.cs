@@ -85,6 +85,7 @@ public class Spawner : MonoBehaviour {
 		tallSize = 3;
 
 		shapeValue = Random.Range(0,16);
+		countShape = shapeValue;
 
 		cubeList = new List<GameObject>();
 		smallCubeList = new List<GameObject>();
@@ -373,6 +374,7 @@ public class Spawner : MonoBehaviour {
 	private int numOfSpace = 0;
 	private int maxSpace = 4;
 	private int countShape = 0;
+	private bool isOneRound = false;
 	private float EmptyShape()
 	{
 		isEmptyShape = true;
@@ -388,15 +390,22 @@ public class Spawner : MonoBehaviour {
 				shapeValue = shapeValue + countShape;								//Change the shape
 
 //				Debug.Log(shapeValue + "  "  + countShape);
+
+				if(shapeValue == 17)
+				{
+					isStraight = !isStraight;
+					if(!isOneRound){
+						countShape = 1;
+						shapeValue = 1;
+						isOneRound = !isOneRound;
+					}
+				}
 				if(shapeValue > 18){
 					countShape = 1;
 					shapeValue = 1;
 				}
 
-				if(shapeValue == 17)
-				{
-					isStraight = !isStraight;
-				}
+
 				numOfSpace = 0;								//reset numOfSpace
 			}
 		}
@@ -783,7 +792,7 @@ public class Spawner : MonoBehaviour {
 			if (numOfSpace1 > maxSpace1) {
 				shapeValue = 0;	
 				numOfSpace1 = 0;								//reset numOfSpace
-				Debug.Log(shapeValue);
+//				Debug.Log(shapeValue);
 			}
 		}
 
