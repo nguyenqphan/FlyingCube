@@ -63,6 +63,8 @@ public class Spawner : MonoBehaviour {
 
 	private int tallSize;
 
+	private int shapeValue;
+
 	private Vector3 currCubePos()
 	{
 		return new Vector3(xPos, yPos, 0);	
@@ -81,6 +83,8 @@ public class Spawner : MonoBehaviour {
 		isFirst = true;
 
 		tallSize = 3;
+
+		shapeValue = Random.Range(0,16);
 
 		cubeList = new List<GameObject>();
 		smallCubeList = new List<GameObject>();
@@ -338,7 +342,7 @@ public class Spawner : MonoBehaviour {
 		yield return 0;
 	}
 
-	private int shapeValue = 14;
+
 	private float ChooseShape()
 	{
 		switch(shapeValue)
@@ -373,7 +377,7 @@ public class Spawner : MonoBehaviour {
 	{
 		isEmptyShape = true;
 		isZigzag = false;
-
+//		Debug.Log(shapeValue + "  "  + countShape);
 		if (isFirst) {
 			numOfSpace++;
 		}
@@ -382,6 +386,8 @@ public class Spawner : MonoBehaviour {
 
 				countShape++;
 				shapeValue = shapeValue + countShape;								//Change the shape
+
+//				Debug.Log(shapeValue + "  "  + countShape);
 				if(shapeValue > 18){
 					countShape = 1;
 					shapeValue = 1;
@@ -777,6 +783,7 @@ public class Spawner : MonoBehaviour {
 			if (numOfSpace1 > maxSpace1) {
 				shapeValue = 0;	
 				numOfSpace1 = 0;								//reset numOfSpace
+				Debug.Log(shapeValue);
 			}
 		}
 
@@ -927,7 +934,7 @@ public class Spawner : MonoBehaviour {
 //
 //		}
 		numOfSwitches++;
-		if(numOfSwitches > 24)
+		if(numOfSwitches > 48)
 		{
 			numOfSwitches = 0;
 			colorNum = RandomOneColor();
