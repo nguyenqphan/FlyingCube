@@ -58,15 +58,15 @@ public class Spawner : MonoBehaviour {
 	private int cubeAmount;							//The amount of long and small cubes to generate
 	private int InitialCubeNum;						
 	private bool isFirst;							//Refernce to the first cube to instantiate out two.
-	private int goldAmount;
+	private int goldAmount;							//The amount of gold that will be spawned
 
-	private int xPos;								
-	private int yPos = 0;
+	private int xPos;								//store the x position for the next spawn
+	private int yPos = 0;							//store the y position
 
-	private float unit = 0f;
-	private bool switchPlusMinus = true;
+	private float unit = 0f;						//the distance that cubes move
+	private bool switchPlusMinus = true;			//switch between plus and minus unit
 
-	private int tallSize;
+	private int wideSize;							//
 
 	private int shapeValue;
 
@@ -88,7 +88,7 @@ public class Spawner : MonoBehaviour {
 		isFirst = true;
 		goldAmount = 4;
 
-		tallSize = 3;
+		wideSize = 3;
 
 		shapeValue = Random.Range(0,16);
 		countShape = shapeValue;
@@ -735,15 +735,15 @@ public class Spawner : MonoBehaviour {
 		isBlockShape = true;
 		if(isFirst )
 		{
-			tallSize--;
+			wideSize--;
 			return 5f;
 		}
 		else
 		{
-			if(tallSize < 0)
+			if(wideSize < 0)
 			{
 				shapeValue = 0;
-				tallSize = 3;
+				wideSize = 3;
 			}	
 		}
 
@@ -758,15 +758,15 @@ public class Spawner : MonoBehaviour {
 
 		if(isFirst )
 		{
-			tallSize--;
+			wideSize--;
 			return 5f;
 		}
 		else
 		{
-			if(tallSize < 0)
+			if(wideSize < 0)
 			{
 				shapeValue = 0;
-				tallSize = 3;
+				wideSize = 3;
 			}	
 		}
 
