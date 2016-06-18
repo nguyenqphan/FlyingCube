@@ -21,6 +21,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject cube;							//reference to the Long Cube prefab
 	public GameObject smallCube;					//reference to the small cube prefab
 	public GameObject tinyCube;
+	public GameObject gold;
 
 	private Cube cubeComponent;						//reference to the Long Cube script
 	private Cube smallCubeComponent;				//refernce to the small Cube script
@@ -33,14 +34,17 @@ public class Spawner : MonoBehaviour {
 	private Transform cubeTrans;					//reference to the transform of the long cube script
 	private Transform smallCubeTrans;				//reference to the transform of the small cube script
 	private Transform tinyCubeTrans;
+	private Transform goldTrans;
 
 	private List<GameObject> cubeList;				//Store long cubes in a list
 	private List<GameObject> smallCubeList;			//Store small cubes in a list 
 	private List<GameObject> tinyCubeList;
+	private List<GameObject> goldList;
 
 	private List<Transform> cubeTransList;			//Store transform components of long cubes in a list
 	private List<Transform> smallCubeTransList;		//Store transform components of small cubes in a list
 	private List<Transform> tinyCubeTransList;
+	private List<Transform> goldTransList;
 
 	private List<Cube> cubeComponentList;			//Store the cube components of long cubes in a list
 	private List<Cube> smallCubeComponentList;		//Store the cube components of small cubes in a list
@@ -54,6 +58,7 @@ public class Spawner : MonoBehaviour {
 	private int cubeAmount;							//The amount of long and small cubes to generate
 	private int InitialCubeNum;						
 	private bool isFirst;							//Refernce to the first cube to instantiate out two.
+	private int goldAmount;
 
 	private int xPos;								
 	private int yPos = 0;
@@ -81,6 +86,7 @@ public class Spawner : MonoBehaviour {
 		tinyCubeAmount = 40;
 		InitialCubeNum = 34;
 		isFirst = true;
+		goldAmount = 4;
 
 		tallSize = 3;
 
@@ -90,10 +96,12 @@ public class Spawner : MonoBehaviour {
 		cubeList = new List<GameObject>();
 		smallCubeList = new List<GameObject>();
 		tinyCubeList = new List<GameObject>();
+		goldList = new List<GameObject>();
 
 		cubeTransList = new List<Transform>();
 		smallCubeTransList = new List<Transform>();
 		tinyCubeTransList = new List<Transform>();
+		goldTransList = new List<Transform>();
 
 		cubeComponentList = new List<Cube>();
 		smallCubeComponentList = new List<Cube>();
@@ -163,6 +171,18 @@ public class Spawner : MonoBehaviour {
 
 			tinyCubeSkinComponent = newTinyCube.GetComponent<SmallCubeSkin>();
 			tinyCubeSkinComponentList.Add(tinyCubeSkinComponent);
+		}
+
+		for(int i = 0; i < goldAmount; i++)
+		{
+			GameObject newGold = Instantiate(gold, spawnerTrans.position, Quaternion.identity) as GameObject;
+			newGold.transform.parent = spawnerTrans;
+			newGold.SetActive(false);
+
+			goldList.Add(newGold);
+
+			goldTrans = newGold.GetComponent<Transform>();
+			goldTransList.Add(goldTrans);
 		}
 
 
@@ -274,6 +294,20 @@ public class Spawner : MonoBehaviour {
 			}
 		}
 
+		if(numOfSpace == 3)
+		{
+			for(int i = 0; i < goldList.Count; i++)
+			{
+				if(!goldList[i].activeInHierarchy)
+				{
+					goldTransList[i].position = new Vector3(xPos, 0, 0);
+					goldTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
+
+					goldList[i].SetActive(true);
+					break;
+				}
+			}
+		}
 
 		if(isObstacle){
 			xPos--;
@@ -779,7 +813,7 @@ public class Spawner : MonoBehaviour {
 
 	private int numOfSpace1 = 0;
 	private int maxSpace1 = 15;
-	private int countShape1 = 0;
+//	private int countShape1 = 0;
 	private float ObstacleShape()
 	{
 		isEmptyShape = true;
@@ -932,7 +966,7 @@ public class Spawner : MonoBehaviour {
 	}
 
 	private bool isTwoColorSwitch = true;
-	private int countCube = 1;
+//	private int countCube = 1;
 	private int colorNum = 1;
 	private int numOfSwitches = 0;
 	private int twoColorSwitch()
