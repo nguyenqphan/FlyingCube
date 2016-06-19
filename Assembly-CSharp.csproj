@@ -45,6 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusConstants.cs" />
+     <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusMaterial.cs" />
+     <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusMeshes.cs" />
+     <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusObject.cs" />
+     <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusType.cs" />
      <Compile Include="Assets\__Scripts\CameraMove.cs" />
      <Compile Include="Assets\__Scripts\Cube.cs" />
      <Compile Include="Assets\__Scripts\CubeSkin.cs" />
@@ -55,6 +60,7 @@
      <Compile Include="Assets\__Scripts\Singleton.cs" />
      <Compile Include="Assets\__Scripts\SmallCubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Spawner.cs" />
+     <None Include="Assets\PrimitivePlus\Documentation\ReadMe.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
