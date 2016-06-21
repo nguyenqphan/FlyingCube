@@ -58,6 +58,7 @@
      <Compile Include="Assets\__Scripts\GameManager.cs" />
      <Compile Include="Assets\__Scripts\Gold.cs" />
      <Compile Include="Assets\__Scripts\Player.cs" />
+     <Compile Include="Assets\__Scripts\Scaling.cs" />
      <Compile Include="Assets\__Scripts\Singleton.cs" />
      <Compile Include="Assets\__Scripts\SmallCubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Spawner.cs" />
