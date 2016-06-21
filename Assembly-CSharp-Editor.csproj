@@ -48,6 +48,7 @@
      <Compile Include="Assets\PrimitivePlus\Editor\PrimitivePlusMaterialEditor.cs" />
      <Compile Include="Assets\PrimitivePlus\Editor\PrimitivePlusMenuItems.cs" />
      <None Include="Assets\PrimitivePlus\Documentation\ReadMe.txt" />
+     <None Include="Assets\Gem\Shaders\Gem.shader" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
