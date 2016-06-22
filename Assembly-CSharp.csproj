@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PrimitivePlus\Scripts\ClockRotation.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusConstants.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusMaterial.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusMeshes.cs" />
