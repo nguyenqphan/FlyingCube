@@ -17,7 +17,7 @@ public class ClockRotation : MonoBehaviour {
 	IEnumerator Rotating(){
 		while(true)
 		{
-			trans.Rotate(trans.forward, 360 * .1f * Time.deltaTime, Space.Self);
+			trans.Rotate(-trans.forward, 360 * .1f * Time.deltaTime, Space.Self);
 			yield return 0;
 		}
 	}
