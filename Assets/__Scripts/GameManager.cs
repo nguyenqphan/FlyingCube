@@ -27,6 +27,14 @@ public class GameManager : Singleton<GameManager> {
 		set{tinyCubeColorNum = value;}
 	}
 
+	private string playerName = "GoldHeart";
+
+	public string PlayerName
+	{
+		get{return playerName;}
+		set{playerName = value;}
+	}
+
 	// Use this for initialization
 	void Start () {
 		SmallCubeColorNum = Random.Range(0, 24);
