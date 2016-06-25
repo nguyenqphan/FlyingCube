@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager> {
 		set{tinyCubeColorNum = value;}
 	}
 
-	private string playerName = "GoldHeart";
+	private string playerName = "WoodOrnament";
 
 	public string PlayerName
 	{
