@@ -22,6 +22,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject smallCube;					//reference to the small cube prefab
 	public GameObject tinyCube;
 	public GameObject gold;
+	public GameObject PlayerBreakingParticle;
 
 	private Cube cubeComponent;						//reference to the Long Cube script
 	private Cube smallCubeComponent;				//refernce to the small Cube script
@@ -35,16 +36,19 @@ public class Spawner : MonoBehaviour {
 	private Transform smallCubeTrans;				//reference to the transform of the small cube script
 	private Transform tinyCubeTrans;
 	private Transform goldTrans;
+	private Transform playerBreakingPartilceTrans;
 
 	private List<GameObject> cubeList;				//Store long cubes in a list
 	private List<GameObject> smallCubeList;			//Store small cubes in a list 
 	private List<GameObject> tinyCubeList;
 	private List<GameObject> goldList;
+	private List<GameObject> playerBreakingParticleList;
 
 	private List<Transform> cubeTransList;			//Store transform components of long cubes in a list
 	private List<Transform> smallCubeTransList;		//Store transform components of small cubes in a list
 	private List<Transform> tinyCubeTransList;
 	private List<Transform> goldTransList;
+	private List<Transform> PlayerBreakingParticleTransList;
 
 	private List<Cube> cubeComponentList;			//Store the cube components of long cubes in a list
 	private List<Cube> smallCubeComponentList;		//Store the cube components of small cubes in a list
@@ -97,11 +101,13 @@ public class Spawner : MonoBehaviour {
 		smallCubeList = new List<GameObject>();
 		tinyCubeList = new List<GameObject>();
 		goldList = new List<GameObject>();
+		playerBreakingParticleList = new List<GameObject>();
 
 		cubeTransList = new List<Transform>();
 		smallCubeTransList = new List<Transform>();
 		tinyCubeTransList = new List<Transform>();
 		goldTransList = new List<Transform>();
+		PlayerBreakingParticleTransList = new List<Transform>();
 
 		cubeComponentList = new List<Cube>();
 		smallCubeComponentList = new List<Cube>();
@@ -111,6 +117,13 @@ public class Spawner : MonoBehaviour {
 		smallCubeSkinComponentList = new List<SmallCubeSkin>();
 		tinyCubeSkinComponentList = new List<SmallCubeSkin>();
 
+		GameObject  newPlayerParticle = Instantiate(PlayerBreakingParticle, spawnerTrans.position, Quaternion.identity) as GameObject;
+		newPlayerParticle.SetActive(false);
+
+		playerBreakingParticleList.Add(newPlayerParticle);
+
+		playerBreakingPartilceTrans = newPlayerParticle.GetComponent<Transform>();
+		PlayerBreakingParticleTransList.Add(playerBreakingPartilceTrans);
 
 		for(int i = 0; i < cubeAmount; i++)
 		{
@@ -995,5 +1008,14 @@ public class Spawner : MonoBehaviour {
 	private int RandomOneColor()
 	{
 		return Random.Range(0,24);
+	}
+
+	public void PlayPlayerBreaking(Transform trans)
+	{
+		playerBreakingPartilceTrans.position = trans.position;
+		playerBreakingPartilceTrans.rotation = trans.rotation;
+
+		playerBreakingParticleList[0].SetActive(true);
+
 	}
 }

@@ -4,6 +4,8 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 	private Rigidbody playerRigid;
+	private Transform playerTrans;
+	private Spawner spawner;
 
 	private bool tap;
 	// Use this for initialization
@@ -11,10 +13,15 @@ public class Player : MonoBehaviour {
 	void Awake()
 	{
 		playerRigid = GetComponent<Rigidbody>();
+		playerTrans = GetComponent<Transform>();
+		spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
+
 	}
 
 	void Start () {
+
 		playerRigid.useGravity = false;
+//		Debug.Log(spawner);
 	}
 	
 	// Update is called once per frame
@@ -41,6 +48,7 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter()
 	{
 		this.gameObject.SetActive(false);
+		spawner.PlayPlayerBreaking(playerTrans);
 	}
 
 
