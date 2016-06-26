@@ -17,12 +17,14 @@ public class Spawner : MonoBehaviour {
 	private bool isObstacle = false;				//if obstacle is on, create another the line in the mid
 
 	private Transform spawnerTrans;					//reference to the Transform component
+	private GoldParticles goldParticleScript;
 		
 	public GameObject cube;							//reference to the Long Cube prefab
 	public GameObject smallCube;					//reference to the small cube prefab
 	public GameObject tinyCube;
 	public GameObject gold;
-	public GameObject PlayerBreakingParticle;
+	public GameObject playerBreakingParticle;
+	public GameObject goldParticles;
 
 	private Cube cubeComponent;						//reference to the Long Cube script
 	private Cube smallCubeComponent;				//refernce to the small Cube script
@@ -37,18 +39,22 @@ public class Spawner : MonoBehaviour {
 	private Transform tinyCubeTrans;
 	private Transform goldTrans;
 	private Transform playerBreakingPartilceTrans;
+	private Transform goldParticlesTrans;
 
 	private List<GameObject> cubeList;				//Store long cubes in a list
 	private List<GameObject> smallCubeList;			//Store small cubes in a list 
 	private List<GameObject> tinyCubeList;
 	private List<GameObject> goldList;
 	private List<GameObject> playerBreakingParticleList;
+	private List<GameObject> goldParticleList;
 
 	private List<Transform> cubeTransList;			//Store transform components of long cubes in a list
 	private List<Transform> smallCubeTransList;		//Store transform components of small cubes in a list
 	private List<Transform> tinyCubeTransList;
 	private List<Transform> goldTransList;
-	private List<Transform> PlayerBreakingParticleTransList;
+	private List<Transform> playerBreakingParticleTransList;
+	private List<Transform> goldParticleTransList;
+
 
 	private List<Cube> cubeComponentList;			//Store the cube components of long cubes in a list
 	private List<Cube> smallCubeComponentList;		//Store the cube components of small cubes in a list
@@ -57,6 +63,8 @@ public class Spawner : MonoBehaviour {
 	private List<CubeSkin> cubeSkinComponentList;
 	private List<SmallCubeSkin> smallCubeSkinComponentList;
 	private List<SmallCubeSkin> tinyCubeSkinComponentList;
+
+	private List<GoldParticles> goldScriptList;
 
 	private int tinyCubeAmount;
 	private int cubeAmount;							//The amount of long and small cubes to generate
@@ -102,12 +110,14 @@ public class Spawner : MonoBehaviour {
 		tinyCubeList = new List<GameObject>();
 		goldList = new List<GameObject>();
 		playerBreakingParticleList = new List<GameObject>();
+		goldParticleList = new List<GameObject>();
 
 		cubeTransList = new List<Transform>();
 		smallCubeTransList = new List<Transform>();
 		tinyCubeTransList = new List<Transform>();
 		goldTransList = new List<Transform>();
-		PlayerBreakingParticleTransList = new List<Transform>();
+		playerBreakingParticleTransList = new List<Transform>();
+		goldParticleTransList = new List<Transform>();
 
 		cubeComponentList = new List<Cube>();
 		smallCubeComponentList = new List<Cube>();
@@ -117,13 +127,32 @@ public class Spawner : MonoBehaviour {
 		smallCubeSkinComponentList = new List<SmallCubeSkin>();
 		tinyCubeSkinComponentList = new List<SmallCubeSkin>();
 
-		GameObject  newPlayerParticle = Instantiate(PlayerBreakingParticle, spawnerTrans.position, Quaternion.identity) as GameObject;
+		goldScriptList = new List<GoldParticles>();
+
+		GameObject  newPlayerParticle = Instantiate(playerBreakingParticle, spawnerTrans.position, Quaternion.identity) as GameObject;
 		newPlayerParticle.SetActive(false);
 
 		playerBreakingParticleList.Add(newPlayerParticle);
 
 		playerBreakingPartilceTrans = newPlayerParticle.GetComponent<Transform>();
-		PlayerBreakingParticleTransList.Add(playerBreakingPartilceTrans);
+		playerBreakingParticleTransList.Add(playerBreakingPartilceTrans);
+
+		for(int i = 0; i < 4; i++)
+		{
+			GameObject  newGoldParticles = Instantiate(goldParticles, spawnerTrans.position, Quaternion.identity) as GameObject;
+			newGoldParticles.transform.parent = spawnerTrans;
+
+			newGoldParticles.SetActive(false);
+			goldParticleList.Add(newGoldParticles);
+
+			goldParticlesTrans = newGoldParticles.GetComponent<Transform>();
+			goldParticleTransList.Add(goldParticlesTrans);
+
+			goldParticleScript = newGoldParticles.GetComponent<GoldParticles>();
+//			Debug.Log(goldParticleScript);
+			goldScriptList.Add(goldParticleScript);
+
+		}
 
 		for(int i = 0; i < cubeAmount; i++)
 		{
@@ -1012,10 +1041,33 @@ public class Spawner : MonoBehaviour {
 
 	public void PlayPlayerBreaking(Transform trans)
 	{
-		playerBreakingPartilceTrans.position = trans.position;
-		playerBreakingPartilceTrans.rotation = trans.rotation;
+		playerBreakingParticleTransList[0].position = trans.position;
+		playerBreakingParticleTransList[0].rotation = trans.rotation;
 
 		playerBreakingParticleList[0].SetActive(true);
+
+	}
+
+	public void StartGoldBreaking(Transform trans)
+	{
+		StartCoroutine(PlayGoldBreaking(trans));
+	}
+
+	private IEnumerator PlayGoldBreaking(Transform trans)
+	{
+		for(int i = 0; i < goldParticleList.Count; i++)
+		{
+			if(!goldParticleList[i].activeInHierarchy)
+			{
+				goldParticleTransList[i].position = trans.position;
+
+				goldParticleList[i].SetActive(true);
+				goldScriptList[i].SetGoldDeactivate();
+				break;
+			}
+		}
+
+		yield return 0;
 
 	}
 }

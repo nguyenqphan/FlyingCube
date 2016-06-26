@@ -58,6 +58,7 @@
      <Compile Include="Assets\__Scripts\ExampleClass.cs" />
      <Compile Include="Assets\__Scripts\GameManager.cs" />
      <Compile Include="Assets\__Scripts\Gold.cs" />
+     <Compile Include="Assets\__Scripts\GoldParticles.cs" />
      <Compile Include="Assets\__Scripts\Player.cs" />
      <Compile Include="Assets\__Scripts\PlayerManager.cs" />
      <Compile Include="Assets\__Scripts\Rotation.cs" />
