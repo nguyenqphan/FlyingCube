@@ -21,7 +21,8 @@ public class Destroyer : MonoBehaviour {
 			if (isCollied) {
 				spanwner.StartSpawnCube ();
 			}
-			
+				
+
 			isCollied = !isCollied;
 		}
 	}
