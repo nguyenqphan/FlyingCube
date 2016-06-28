@@ -94,8 +94,8 @@ public class Spawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cubeAmount = 40;
-		tinyCubeAmount = 40;
+		cubeAmount = 34;
+		tinyCubeAmount = 34;
 		InitialCubeNum = 34;
 		isFirst = true;
 		goldAmount = 4;

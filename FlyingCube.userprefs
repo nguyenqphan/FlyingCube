@@ -1,13 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Scaling.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/PanelController.cs">
     <Files>
-      <File FileName="Assets/__Scripts/Spawner.cs" Line="1" Column="1" />
-      <File FileName="Assets/__Scripts/Player.cs" Line="1" Column="1" />
-      <File FileName="Assets/__Scripts/PlayerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/__Scripts/CameraMove.cs" Line="1" Column="1" />
-      <File FileName="Assets/__Scripts/GameManager.cs" Line="30" Column="39" />
+      <File FileName="Assets/__Scripts/Spawner.cs" Line="98" Column="23" />
+      <File FileName="Assets/__Scripts/Player.cs" Line="59" Column="20" />
+      <File FileName="Assets/__Scripts/PlayerManager.cs" Line="21" Column="1" />
+      <File FileName="Assets/__Scripts/CameraMove.cs" Line="23" Column="2" />
+      <File FileName="Assets/__Scripts/GameManager.cs" Line="42" Column="25" />
       <File FileName="Assets/__Scripts/Scaling.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/PanelController.cs" Line="25" Column="14" />
+      <File FileName="Assets/__Scripts/GameController.cs" Line="36" Column="19" />
+      <File FileName="Assets/__Scripts/DontDestroy.cs" Line="14" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

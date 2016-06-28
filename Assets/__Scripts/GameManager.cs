@@ -35,6 +35,28 @@ public class GameManager : Singleton<GameManager> {
 		set{playerName = value;}
 	}
 
+	private bool isStarted = false;
+
+	public bool IsStarted{
+		get{return isStarted;}
+		set{isStarted = value;}
+	}
+
+	private bool isCameraMoved = false;
+
+	public bool IsCameraMoved
+	{
+		get{return isCameraMoved;}
+		set{isCameraMoved = value;}
+	}
+
+	private int score = 0;
+
+	public int Score{
+		get{return score;}
+		set{score = value;}
+	}
+
 	// Use this for initialization
 	void Start () {
 		SmallCubeColorNum = Random.Range(0, 24);

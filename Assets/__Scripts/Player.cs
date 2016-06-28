@@ -6,6 +6,9 @@ public class Player : MonoBehaviour {
 	private Rigidbody playerRigid;
 	private Transform playerTrans;
 	private Spawner spawner;
+	private CameraMove cameraMove;
+	private PanelController panelController;
+	private UpdateScore updateScore;
 
 	private bool tap;
 	// Use this for initialization
@@ -15,6 +18,9 @@ public class Player : MonoBehaviour {
 		playerRigid = GetComponent<Rigidbody>();
 		playerTrans = GetComponent<Transform>();
 		spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
+		cameraMove = GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>();
+		panelController = GameObject.FindWithTag("UI").GetComponent<PanelController>();
+		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
 
 	}
 
@@ -27,7 +33,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetButtonDown("Fire1"))
+		if(Input.GetButtonDown("Fire1") && GameManager.Instance.IsCameraMoved)
 		{
 			tap = true;
 		}
@@ -41,14 +47,34 @@ public class Player : MonoBehaviour {
 			playerRigid.useGravity = true;
 			Flap();
 			tap = false;
+			if(GameManager.Instance.IsStarted == true)
+			{
+				GameManager.Instance.IsStarted = false;
+				cameraMove.isPlaying = true;
+				cameraMove.GoingForward();
+
+				updateScore.isCountingScore = true;
+				updateScore.IncreaseScore();
+
+
+			}
 		}
 	}
 
 
-	void OnCollisionEnter()
+	void OnTriggerEnter(Collider other)
 	{
-		this.gameObject.SetActive(false);
-		spawner.PlayPlayerBreaking(playerTrans);
+		if(other.CompareTag("Cube"))
+		{
+			this.gameObject.SetActive(false);
+			spawner.PlayPlayerBreaking(playerTrans);
+			cameraMove.isPlaying = false; 						//stop the camera
+			panelController.ShowMainPanel();
+			GameManager.Instance.IsStarted = true;
+			GameManager.Instance.IsCameraMoved = true;
+
+			updateScore.isCountingScore = false;				//Stop counting score;
+		}
 	}
 
 

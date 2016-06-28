@@ -4,7 +4,8 @@ using System.Collections;
 public class CameraMove : MonoBehaviour {
 
 	private Transform thisTransform;
-	private bool isPlaying = true;
+	[HideInInspector]
+	public bool isPlaying = true;
 	private  float speed = 5f;
 
 	void Awake()
@@ -12,14 +13,14 @@ public class CameraMove : MonoBehaviour {
 		thisTransform = GetComponent<Transform>();
 	}
 
-	// Use this for initialization
-	void Start () {
+//	void Start()
+//	{
+//		StartCoroutine(GoForward());
+//	}
+//
+	public void GoingForward()
+	{
 		StartCoroutine(GoForward());
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	IEnumerator GoForward()
