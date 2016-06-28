@@ -5,9 +5,11 @@ public class Gold : MonoBehaviour {
 
 	private Spawner spawner;
 	private Transform trans;
+	private UpdateScore updateScore;
 	void Awake()
 	{
 		spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
+		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
 		trans = GetComponent<Transform>();
 	}
 
@@ -26,6 +28,10 @@ public class Gold : MonoBehaviour {
 		gameObject.SetActive(false);
 		if (other.CompareTag("Player")) {
 			spawner.StartGoldBreaking (trans);
+			GameManager.Instance.Gold++;
+			updateScore.ChangeGold();
+
+
 		}
 	}
 		

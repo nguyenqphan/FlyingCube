@@ -54,7 +54,14 @@ public class GameManager : Singleton<GameManager> {
 
 	public int Score{
 		get{return score;}
-		set{score = value;}
+		set{score = value;	}
+	}
+
+	private int gold = 0;
+
+	public int Gold{
+		get{return gold;}
+		set{gold = value;}
 	}
 
 	// Use this for initialization

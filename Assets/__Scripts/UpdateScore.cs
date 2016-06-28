@@ -6,7 +6,9 @@ public class UpdateScore : MonoBehaviour {
 
 	[HideInInspector]
 	public bool isCountingScore = true;
-	public Text liveScoreLable;
+	public Text liveScoreLable;						//Display Live Score
+	public Text goldLabel;							//Display amount of gold
+
 
 	public void IncreaseScore()
 	{
@@ -23,15 +25,14 @@ public class UpdateScore : MonoBehaviour {
 		}
 	}
 
-
-	private string FormatTime(float timeInSeconds)
-	{
-		return string.Format("{0}:{1:00}", Mathf.FloorToInt(timeInSeconds/60), Mathf.FloorToInt(timeInSeconds%60)); 
-	}
-
 	public void ChangeLiveScore()
 	{
 		liveScoreLable.text = GameManager.Instance.Score.ToString(); 
 //		GameCenterAPI.GCReportAchievement();
+	}
+
+	public void ChangeGold()
+	{
+		goldLabel.text = GameManager.Instance.Gold.ToString();
 	}
 }
