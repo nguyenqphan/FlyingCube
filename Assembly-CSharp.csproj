@@ -52,9 +52,11 @@
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusObject.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusType.cs" />
      <Compile Include="Assets\__Scripts\CameraMove.cs" />
+     <Compile Include="Assets\__Scripts\Character.cs" />
      <Compile Include="Assets\__Scripts\Cube.cs" />
      <Compile Include="Assets\__Scripts\CubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Destroyer.cs" />
+     <Compile Include="Assets\__Scripts\DontDestroy.cs" />
      <Compile Include="Assets\__Scripts\ExampleClass.cs" />
      <Compile Include="Assets\__Scripts\GameController.cs" />
      <Compile Include="Assets\__Scripts\GameManager.cs" />
@@ -65,6 +67,7 @@
      <Compile Include="Assets\__Scripts\PlayerManager.cs" />
      <Compile Include="Assets\__Scripts\Rotation.cs" />
      <Compile Include="Assets\__Scripts\Scaling.cs" />
+     <Compile Include="Assets\__Scripts\ShopCharacters.cs" />
      <Compile Include="Assets\__Scripts\Singleton.cs" />
      <Compile Include="Assets\__Scripts\SmallCubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Spawner.cs" />

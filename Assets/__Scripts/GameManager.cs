@@ -3,6 +3,14 @@ using System.Collections;
 
 public class GameManager : Singleton<GameManager> {
 
+	private string playerName = "Soccer";
+
+	public string PlayerName
+	{
+		get{return playerName;}
+		set{playerName = value;}
+	}
+
 	private int numSpawnedCube = 2;
 
 	public int NumSpawnedCube
@@ -27,13 +35,7 @@ public class GameManager : Singleton<GameManager> {
 		set{tinyCubeColorNum = value;}
 	}
 
-	private string playerName = "CubeDiamond";
 
-	public string PlayerName
-	{
-		get{return playerName;}
-		set{playerName = value;}
-	}
 
 	private bool isStarted = false;
 
