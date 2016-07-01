@@ -86,10 +86,17 @@ public class GameManager : Singleton<GameManager> {
 		set{curPrice = value;}
 	}
 
-	private int curPlayerAvail = 1;
+	private int curPlayerAvail = 7;
 	public int CurPlayerAvail{
 		get{return curPlayerAvail;}
 		set{curPlayerAvail = value;}
+	}
+
+	private int amountOfDiamond = 0;
+	public int AmountOfDiamond
+	{
+		get{return amountOfDiamond;}
+		set{amountOfDiamond = value;}
 	}
 
 	public void Save()
