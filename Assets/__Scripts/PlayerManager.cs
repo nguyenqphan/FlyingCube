@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject instance = Instantiate(Resources.Load(GameManager.Instance.PlayerName, typeof(GameObject))) as GameObject;
+		GameObject instance = Instantiate(Resources.Load(GameManager.Instance.CurPlayerName, typeof(GameObject))) as GameObject;
 		instance.transform.parent = thisTransform;
 
 	}
