@@ -12,6 +12,7 @@ public class UpdateScore : MonoBehaviour {
 
 	public void IncreaseScore()
 	{
+		StopAllCoroutines();
 		StartCoroutine(Score());
 	}
 

@@ -46,7 +46,7 @@ public class Shop : MonoBehaviour {
 //		GameManager.Instance.CurPlayerName = "defPlayer";
 //
 ////
-//		GameManager.Instance.AmountOfDiamond = 1000;
+//		GameManager.Instance.AmountOfDiamond = 10000;
 		updateScore.ChangeAmountOfDiamond();
 		GameManager.Instance.Save();
 //
@@ -105,7 +105,7 @@ public class Shop : MonoBehaviour {
 
 		if((GameManager.Instance.CurPlayerAvail & 1 << index) == 1 << index)
 		{
-			Debug.Log("Button Index in Shop A " + index);
+//			Debug.Log("Button Index in Shop A " + index);
 			GameManager.Instance.CurPlayerIndex = index;												//Choose player
 			GameManager.Instance.CurPlayerName = playerCollections[index].nameOfPlayer;
 			playerCollections[index].lockImage.SetActive(false);										//turn lockImage off
@@ -118,7 +118,7 @@ public class Shop : MonoBehaviour {
 			if(GameManager.Instance.AmountOfDiamond >= playerCollections[index].priceOfPlayer)
 			{
 
-				Debug.Log("Current index in Shop A " + index );
+//				Debug.Log("Current index in Shop A " + index );
 				GameManager.Instance.CurPlayerIndex = index;	
 				GameManager.Instance.CurPlayerName = playerCollections[index].nameOfPlayer;//Choose player
 				SwapCheckImage(index);																	//Swap CheckImage
@@ -138,7 +138,7 @@ public class Shop : MonoBehaviour {
 
 		if((GameManager.Instance.CurPlayerAvailSB & 1 << index) == 1 << index)
 		{
-			Debug.Log("Button Index " + index);
+//			Debug.Log("Button Index " + index);
 			GameManager.Instance.CurPlayerIndex = index + stateIndexSB;												//Choose player
 			GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSB].nameOfPlayer;
 			playerCollections[index + stateIndexSB].lockImage.SetActive(false);										//turn lockImage off
@@ -151,7 +151,7 @@ public class Shop : MonoBehaviour {
 			if(GameManager.Instance.AmountOfDiamond >= playerCollections[index + stateIndexSB].priceOfPlayer)
 			{
 
-				Debug.Log(index + stateIndexSB);
+//				Debug.Log(index + stateIndexSB);
 				GameManager.Instance.CurPlayerIndex = index + stateIndexSB;
 				GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSB].nameOfPlayer;//Choose player
 				SwapCheckImage(index + stateIndexSB);																	//Swap CheckImage
@@ -160,7 +160,7 @@ public class Shop : MonoBehaviour {
 
 				GameManager.Instance.CurPlayerAvailSB += 1 << index;
 				playerCollections[index + stateIndexSB].lockImage.SetActive(false);
-				Debug.Log(GameManager.Instance.AmountOfDiamond);										//Turn lockImage off
+//				Debug.Log(GameManager.Instance.AmountOfDiamond);										//Turn lockImage off
 				GameManager.Instance.Save();
 			}
 		}
@@ -172,7 +172,7 @@ public class Shop : MonoBehaviour {
 
 		if((GameManager.Instance.CurPlayerAvailSC & 1 << index) == 1 << index)
 		{
-			Debug.Log("Button Index " + index);
+//			Debug.Log("Button Index " + index);
 			GameManager.Instance.CurPlayerIndex = index + stateIndexSC;												//Choose player
 			GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSC].nameOfPlayer;
 			playerCollections[index + stateIndexSC].lockImage.SetActive(false);										//turn lockImage off
@@ -185,7 +185,7 @@ public class Shop : MonoBehaviour {
 			if(GameManager.Instance.AmountOfDiamond >= playerCollections[index + stateIndexSC].priceOfPlayer)
 			{
 
-				Debug.Log(index + stateIndexSB);
+//				Debug.Log(index + stateIndexSB);
 				GameManager.Instance.CurPlayerIndex = index + stateIndexSC;	
 				GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSC].nameOfPlayer;//Choose player
 				SwapCheckImage(index + stateIndexSC);																	//Swap CheckImage
@@ -194,7 +194,7 @@ public class Shop : MonoBehaviour {
 
 				GameManager.Instance.CurPlayerAvailSC += 1 << index;
 				playerCollections[index + stateIndexSC].lockImage.SetActive(false);
-				Debug.Log(GameManager.Instance.AmountOfDiamond);										//Turn lockImage off
+//				Debug.Log(GameManager.Instance.AmountOfDiamond);										//Turn lockImage off
 				GameManager.Instance.Save();
 			}
 		}

@@ -941,14 +941,14 @@ public class Spawner : MonoBehaviour {
 		for(int i = 0; i < InitialCubeNum; i += 2)
 		{
 
-			cubeTransList[i].position = new Vector3(xPos, yPos + 17f, 0f);
+			cubeTransList[i].position = new Vector3(xPos, yPos + 19f, 0f);
 			cubeTransList[i].rotation = Quaternion.Euler(0f,0f,0f);
 			cubeSkinComponentList[i].ChooseColor(CubeMatNum);
 
 
 			cubeList[i].SetActive(true);
 
-			cubeTransList[i + 1].position =  new Vector3(xPos, yPos - 17f, 0f);
+			cubeTransList[i + 1].position =  new Vector3(xPos, yPos - 19, 0f);
 			cubeTransList[i + 1].rotation = Quaternion.Euler(0f,0f,0f);
 			cubeSkinComponentList[i + 1].ChooseColor(CubeMatNum);
 			cubeList[i + 1].SetActive(true);

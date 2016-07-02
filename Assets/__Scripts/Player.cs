@@ -74,6 +74,7 @@ public class Player : MonoBehaviour {
 			GameManager.Instance.IsCameraMoved = true;
 
 			updateScore.isCountingScore = false;				//Stop counting score;
+			GameManager.Instance.Save();						//Save the state of the game
 		}
 	}
 
