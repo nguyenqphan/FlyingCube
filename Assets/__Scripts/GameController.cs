@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
 	public void StartGame()
 	{
 		GameManager.Instance.IsCameraMoved = true;
+		GameManager.Instance.IsStartButtonPressed = true;
 		cameraMove.GoingForward();
 		panelController.HideMainPanel();
 		updateScore.IncreaseScore();

@@ -54,6 +54,12 @@ public class GameManager : Singleton<GameManager> {
 		set{isCameraMoved = value;}
 	}
 
+	public bool isStartButtonPressed = false;
+	public bool IsStartButtonPressed{
+		get{return isStartButtonPressed;}
+		set{isStartButtonPressed = value;}
+	}
+
 	private int score = 0;
 
 	public int Score{
@@ -92,6 +98,19 @@ public class GameManager : Singleton<GameManager> {
 		set{curPlayerAvail = value;}
 	}
 
+
+	private int curPlayerAvailSB = 0;
+	public int CurPlayerAvailSB{
+		get{return curPlayerAvailSB;}
+		set{curPlayerAvailSB = value;}
+	}
+
+	private int curPlayerAvailSC = 0;
+	public int CurPlayerAvailSC{
+		get{return curPlayerAvailSC;}
+		set{curPlayerAvailSC = value;}
+	}
+
 	private int amountOfDiamond = 0;
 	public int AmountOfDiamond
 	{
@@ -109,7 +128,11 @@ public class GameManager : Singleton<GameManager> {
 		data.playerIndex = GameManager.Instance.CurPlayerIndex;
 		data.price = GameManager.Instance.CurPrice;
 		data.playerAvailability = GameManager.Instance.CurPlayerAvail;
+		data.playerAvailabilitySB = GameManager.Instance.CurPlayerAvailSB;
+		data.playerAvailabilitySC = GameManager.Instance.CurPlayerAvailSC;
 		data.name = GameManager.Instance.CurPlayerName;
+		data.amountDiamond = GameManager.Instance.AmountOfDiamond;
+
 		bf.Serialize(file, data);
 		file.Close();
 	}
@@ -125,7 +148,10 @@ public class GameManager : Singleton<GameManager> {
 			GameManager.Instance.CurPlayerIndex = data.playerIndex;
 			GameManager.Instance.CurPrice = data.price;
 			GameManager.Instance.CurPlayerAvail = data.playerAvailability;
+			GameManager.Instance.CurPlayerAvailSB = data.playerAvailabilitySB;
+			GameManager.Instance.CurPlayerAvailSC = data.playerAvailabilitySC;
 			GameManager.Instance.CurPlayerName = data.name;
+			GameManager.Instance.AmountOfDiamond = data.amountDiamond;
 
 			file.Close();
 		}
@@ -138,5 +164,9 @@ public class GameManager : Singleton<GameManager> {
 		public int playerIndex;
 		public int price;
 		public int playerAvailability;
+		public int playerAvailabilitySB;
+		public int playerAvailabilitySC;
+		public int amountDiamond;
+	
 	}
 }

@@ -31,8 +31,8 @@ public class UpdateScore : MonoBehaviour {
 //		GameCenterAPI.GCReportAchievement();
 	}
 
-	public void ChangeGold()
+	public void ChangeAmountOfDiamond()
 	{
-		goldLabel.text = GameManager.Instance.Gold.ToString();
+		goldLabel.text = GameManager.Instance.AmountOfDiamond.ToString();
 	}
 }

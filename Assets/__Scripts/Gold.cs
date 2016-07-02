@@ -28,8 +28,8 @@ public class Gold : MonoBehaviour {
 		gameObject.SetActive(false);
 		if (other.CompareTag("Player")) {
 			spawner.StartGoldBreaking (trans);
-			GameManager.Instance.Gold++;
-			updateScore.ChangeGold();
+			GameManager.Instance.AmountOfDiamond++;
+			updateScore.ChangeAmountOfDiamond();
 
 
 		}
