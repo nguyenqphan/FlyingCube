@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PanelController : MonoBehaviour {
 
+	public UpdateScore updateScore;
+
 	public GameObject mainPanel;
 	public GameObject playButton;
 	public GameObject refreshButton;
@@ -13,6 +15,10 @@ public class PanelController : MonoBehaviour {
 	public GameObject doubleScoreButton;
 	public GameObject shopPanel;
 
+	void Awake()
+	{
+		updateScore = GameObject.Find("UI").GetComponent<UpdateScore>();
+	}
 	// Use this for initialization
 	void Start () {
 	
@@ -53,5 +59,18 @@ public class PanelController : MonoBehaviour {
 	{
 		shopPanel.SetActive(false);
 		ShowMainPanel();
+	}
+
+	public void ShowScorePanel()
+	{
+		updateScore.DisplayFinalScore();						//update final scores before showing them.
+		scorePanel.SetActive(true);
+		liveScoreText.SetActive(false);
+	}
+
+	public void HideScorePanel()
+	{
+		scorePanel.SetActive(false);
+		liveScoreText.SetActive(true);
 	}
 }

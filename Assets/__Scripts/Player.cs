@@ -69,11 +69,16 @@ public class Player : MonoBehaviour {
 			this.gameObject.SetActive(false);
 			spawner.PlayPlayerBreaking(playerTrans);
 			cameraMove.isPlaying = false; 						//stop the camera
+
+
 			panelController.ShowMainPanel();
+			panelController.ShowScorePanel();
 			GameManager.Instance.IsStarted = true;
 			GameManager.Instance.IsCameraMoved = true;
 
 			updateScore.isCountingScore = false;				//Stop counting score;
+			updateScore.DisplayFinalScore();
+
 			GameManager.Instance.Save();						//Save the state of the game
 		}
 	}

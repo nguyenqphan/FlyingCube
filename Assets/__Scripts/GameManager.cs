@@ -67,6 +67,12 @@ public class GameManager : Singleton<GameManager> {
 		set{score = value;	}
 	}
 
+	private int bestScore = 0;
+	public int BestScore{
+		get{return bestScore;}
+		set{bestScore = value;}
+	}
+
 	private int gold = 0;
 
 	public int Gold{
@@ -132,6 +138,7 @@ public class GameManager : Singleton<GameManager> {
 		data.playerAvailabilitySC = GameManager.Instance.CurPlayerAvailSC;
 		data.name = GameManager.Instance.CurPlayerName;
 		data.amountDiamond = GameManager.Instance.AmountOfDiamond;
+		data.highestScore = GameManager.Instance.BestScore;
 
 		bf.Serialize(file, data);
 		file.Close();
@@ -152,6 +159,7 @@ public class GameManager : Singleton<GameManager> {
 			GameManager.Instance.CurPlayerAvailSC = data.playerAvailabilitySC;
 			GameManager.Instance.CurPlayerName = data.name;
 			GameManager.Instance.AmountOfDiamond = data.amountDiamond;
+			GameManager.Instance.BestScore = data.highestScore;
 
 			file.Close();
 		}
@@ -167,6 +175,7 @@ public class GameManager : Singleton<GameManager> {
 		public int playerAvailabilitySB;
 		public int playerAvailabilitySC;
 		public int amountDiamond;
+		public int highestScore;
 	
 	}
 }

@@ -8,6 +8,8 @@ public class UpdateScore : MonoBehaviour {
 	public bool isCountingScore = true;
 	public Text liveScoreLable;						//Display Live Score
 	public Text goldLabel;							//Display amount of gold
+	public Text bestScoreLable;						//Display Best Score after the game ends
+	public Text curScoreLabel;						//Display current score after the game ends
 
 
 	public void IncreaseScore()
@@ -35,5 +37,18 @@ public class UpdateScore : MonoBehaviour {
 	public void ChangeAmountOfDiamond()
 	{
 		goldLabel.text = GameManager.Instance.AmountOfDiamond.ToString();
+	}
+
+	public void DisplayFinalScore()
+	{
+		
+		curScoreLabel.text = GameManager.Instance.Score.ToString();
+
+		if(GameManager.Instance.Score > GameManager.Instance.BestScore)
+		{
+			GameManager.Instance.BestScore = GameManager.Instance.Score;
+		}
+		bestScoreLable.text = GameManager.Instance.BestScore.ToString();
+
 	}
 }

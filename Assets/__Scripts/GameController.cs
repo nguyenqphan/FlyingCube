@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour {
 		GameManager.Instance.IsStarted = true;
 //		cameraMove.GoingForward();
 		panelController.HideMainPanel();
+		panelController.HideScorePanel();
 	}
 
 	public void RefreshGame()
@@ -43,6 +44,7 @@ public class GameController : MonoBehaviour {
 //		cameraMove.GoingForward();
 							//Enable Camera to move
 		panelController.HideMainPanel();
+		panelController.HideScorePanel();
 		updateScore.ChangeLiveScore();
 	}
 }
