@@ -28,15 +28,16 @@ public class GameController : MonoBehaviour {
 	{
 		GameManager.Instance.IsCameraMoved = true;
 		GameManager.Instance.IsStartButtonPressed = true;
-		cameraMove.GoingForward();
+		GameManager.Instance.IsStarted = true;
+//		cameraMove.GoingForward();
 		panelController.HideMainPanel();
-		updateScore.IncreaseScore();
 	}
 
 	public void RefreshGame()
 	{
 		SceneManager.LoadScene(0);
 		GameManager.Instance.Score = 0;
+		GameManager.Instance.IsCameraMoved = true;
 //		cameraMove.isPlaying = true;
 //		Debug.Log(cameraMove.isPlaying);
 //		cameraMove.GoingForward();

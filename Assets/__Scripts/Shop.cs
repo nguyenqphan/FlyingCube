@@ -105,7 +105,11 @@ public class Shop : MonoBehaviour {
 
 		if((GameManager.Instance.CurPlayerAvail & 1 << index) == 1 << index)
 		{
-//			Debug.Log("Button Index in Shop A " + index);
+			GameManager.Instance.IsStartButtonPressed = true; 											//... to replace startButton with RefreshButton to reload scene
+			GameManager.Instance.IsCameraMoved = false;													//... to move camera forward on first tap to begin the game
+			GameManager.Instance.IsStarted = true;
+
+			Debug.Log("Button Index in Shop A " + index);
 			GameManager.Instance.CurPlayerIndex = index;												//Choose player
 			GameManager.Instance.CurPlayerName = playerCollections[index].nameOfPlayer;
 			playerCollections[index].lockImage.SetActive(false);										//turn lockImage off
@@ -117,8 +121,11 @@ public class Shop : MonoBehaviour {
 			//if this player has not been bought....
 			if(GameManager.Instance.AmountOfDiamond >= playerCollections[index].priceOfPlayer)
 			{
+				GameManager.Instance.IsStartButtonPressed = true; 											//... to replace startButton with RefreshButton to reload scene
+				GameManager.Instance.IsCameraMoved = false;													//... to move camera forward on first tap to begin the game
+				GameManager.Instance.IsStarted = true;
 
-//				Debug.Log("Current index in Shop A " + index );
+				Debug.Log("Current index in Shop A " + index );
 				GameManager.Instance.CurPlayerIndex = index;	
 				GameManager.Instance.CurPlayerName = playerCollections[index].nameOfPlayer;//Choose player
 				SwapCheckImage(index);																	//Swap CheckImage
@@ -138,7 +145,11 @@ public class Shop : MonoBehaviour {
 
 		if((GameManager.Instance.CurPlayerAvailSB & 1 << index) == 1 << index)
 		{
-//			Debug.Log("Button Index " + index);
+			GameManager.Instance.IsStartButtonPressed = true; 											//... to replace startButton with RefreshButton to reload scene
+			GameManager.Instance.IsCameraMoved = false;													//... to move camera forward on first tap to begin the game
+
+			GameManager.Instance.IsStarted = true;
+			Debug.Log("Button Index " + index);
 			GameManager.Instance.CurPlayerIndex = index + stateIndexSB;												//Choose player
 			GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSB].nameOfPlayer;
 			playerCollections[index + stateIndexSB].lockImage.SetActive(false);										//turn lockImage off
@@ -150,8 +161,11 @@ public class Shop : MonoBehaviour {
 			//if this player has not been bought....
 			if(GameManager.Instance.AmountOfDiamond >= playerCollections[index + stateIndexSB].priceOfPlayer)
 			{
+				GameManager.Instance.IsStartButtonPressed = true; 											//... to replace startButton with RefreshButton to reload scene
+				GameManager.Instance.IsCameraMoved = false;													//... to move camera forward on first tap to begin the game
 
-//				Debug.Log(index + stateIndexSB);
+				GameManager.Instance.IsStarted = true;
+				Debug.Log(index + stateIndexSB);
 				GameManager.Instance.CurPlayerIndex = index + stateIndexSB;
 				GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSB].nameOfPlayer;//Choose player
 				SwapCheckImage(index + stateIndexSB);																	//Swap CheckImage
@@ -172,7 +186,11 @@ public class Shop : MonoBehaviour {
 
 		if((GameManager.Instance.CurPlayerAvailSC & 1 << index) == 1 << index)
 		{
-//			Debug.Log("Button Index " + index);
+			GameManager.Instance.IsStartButtonPressed = true; 											//... to replace startButton with RefreshButton to reload scene
+			GameManager.Instance.IsCameraMoved = false;													//... to move camera forward on first tap to begin the game
+			GameManager.Instance.IsStarted = true;
+
+			Debug.Log("Button Index " + index);
 			GameManager.Instance.CurPlayerIndex = index + stateIndexSC;												//Choose player
 			GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSC].nameOfPlayer;
 			playerCollections[index + stateIndexSC].lockImage.SetActive(false);										//turn lockImage off
@@ -184,8 +202,11 @@ public class Shop : MonoBehaviour {
 			//if this player has not been bought....
 			if(GameManager.Instance.AmountOfDiamond >= playerCollections[index + stateIndexSC].priceOfPlayer)
 			{
+				GameManager.Instance.IsStartButtonPressed = true; 											//... to replace startButton with RefreshButton to reload scene
+				GameManager.Instance.IsCameraMoved = false;													//... to move camera forward on first tap to begin the game
+				GameManager.Instance.IsStarted = true;
 
-//				Debug.Log(index + stateIndexSB);
+				Debug.Log(index + stateIndexSB);
 				GameManager.Instance.CurPlayerIndex = index + stateIndexSC;	
 				GameManager.Instance.CurPlayerName = playerCollections[index + stateIndexSC].nameOfPlayer;//Choose player
 				SwapCheckImage(index + stateIndexSC);																	//Swap CheckImage

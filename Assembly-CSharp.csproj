@@ -51,6 +51,7 @@
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusMeshes.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusObject.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusType.cs" />
+     <Compile Include="Assets\__Scripts\AdaptingEventSystemDragThreshold.cs" />
      <Compile Include="Assets\__Scripts\CameraMove.cs" />
      <Compile Include="Assets\__Scripts\Cube.cs" />
      <Compile Include="Assets\__Scripts\CubeSkin.cs" />
