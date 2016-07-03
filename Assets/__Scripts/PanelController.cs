@@ -14,6 +14,8 @@ public class PanelController : MonoBehaviour {
 	public GameObject liveScoreText;
 	public GameObject doubleScoreButton;
 	public GameObject shopPanel;
+	public GameObject noAdsPanel;
+	public GameObject gameTileText;
 
 	void Awake()
 	{
@@ -73,4 +75,17 @@ public class PanelController : MonoBehaviour {
 		scorePanel.SetActive(false);
 		liveScoreText.SetActive(true);
 	}
+
+	public void ShowNoAdsPanel()
+	{
+		HideMainPanel();
+		noAdsPanel.SetActive(true);
+	}
+
+	public void HideNoAdsPanel()
+	{
+		ShowMainPanel();
+		noAdsPanel.SetActive(false);
+	}
+		
 }

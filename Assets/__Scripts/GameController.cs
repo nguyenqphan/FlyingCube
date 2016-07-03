@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 
 	public void StartGame()
 	{
+		panelController.gameTileText.SetActive(false);
 		GameManager.Instance.IsCameraMoved = true;
 		GameManager.Instance.IsStartButtonPressed = true;
 		GameManager.Instance.IsStarted = true;
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour {
 
 	public void RefreshGame()
 	{
+		panelController.gameTileText.SetActive(false);
 		SceneManager.LoadScene(0);
 		GameManager.Instance.Score = 0;
 		GameManager.Instance.IsCameraMoved = true;
