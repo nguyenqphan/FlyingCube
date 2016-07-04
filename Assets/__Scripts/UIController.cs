@@ -5,6 +5,7 @@ public class UIController : MonoBehaviour {
 
 	private Transform trans;
 
+	private bool isClicked = false;
 	private float startScale;
 	private float newScale;
 	private float scale;
@@ -17,7 +18,7 @@ public class UIController : MonoBehaviour {
 	private float curPosX;
 	private float curPosY;
 	private float distance = 1f;
-	private float movingSpeed = 1000f;
+	private float movingSpeed = 2000f;
 	private PanelController panelController;
 	private UpdateScore updateScore;
 
@@ -42,7 +43,7 @@ public class UIController : MonoBehaviour {
 	{
 		if(curPosY < distance && GameManager.Instance.IsSlowScore && !GameManager.Instance.IsDouble)
 		{
-			Debug.Log("move down");
+//			Debug.Log("move down");
 			GameManager.Instance.IsSlowScore = false;
 			StartFastDownward();
 		}
@@ -80,11 +81,14 @@ public class UIController : MonoBehaviour {
 	{
 //		Debug.Log("Im in FarwardFast");
 //		StopAllCoroutines();
-		GameManager.Instance.IsDouble = true;
-		GameManager.Instance.AmountOfDiamond-=5;
-		updateScore.ChangeAmountOfDiamond();
-		panelController.ShowOrHideFastImage();
-		StartCoroutine(FastForWard());
+		if (!isClicked) {
+			isClicked = true;
+			GameManager.Instance.IsDouble = true;
+			GameManager.Instance.AmountOfDiamond -= 5;
+			updateScore.ChangeAmountOfDiamond ();
+			panelController.ShowOrHideFastImage ();
+			StartCoroutine (FastForWard ());
+		}
 	}
 
 	private IEnumerator FastForWard()
@@ -97,6 +101,7 @@ public class UIController : MonoBehaviour {
 		}	
 
 		curPosX = 0;
+		isClicked = false;
 		this.gameObject.SetActive(false);
 		trans.localPosition = new Vector3(startPosX, trans.localPosition.y,trans.localPosition.z);
 

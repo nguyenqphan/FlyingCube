@@ -39,9 +39,9 @@ public class PanelController : MonoBehaviour {
 	public void HideMainPanel()
 	{
 		mainPanel.SetActive(false);
-		if (GameManager.Instance.AmountOfDiamond > 4) {
-			ShowX2DoubleButton ();
-		}
+//		if (GameManager.Instance.AmountOfDiamond > 4) {
+//			ShowX2DoubleButton ();
+//		}
 	}
 
 	public void ShowMainPanel()
@@ -107,7 +107,9 @@ public class PanelController : MonoBehaviour {
 
 	public void ShowX2DoubleButton()
 	{
-		x2ScoreButton.SetActive(true);
+		if (GameManager.Instance.AmountOfDiamond > 4) {
+			x2ScoreButton.SetActive (true);
+		}
 	}
 
 	public void HideX2DoubleButon()

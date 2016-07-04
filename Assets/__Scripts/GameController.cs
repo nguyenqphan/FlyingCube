@@ -7,12 +7,14 @@ public class GameController : MonoBehaviour {
 	private PanelController panelController;
 	private CameraMove cameraMove;
 	private UpdateScore updateScore;
-
+	private Spawner spawner;
 	void Awake()
 	{
 		panelController = GetComponent<PanelController>();
 		cameraMove = GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>();
 		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
+
+
 	}
 	// Use this for initialization
 	void Start () {
@@ -38,7 +40,10 @@ public class GameController : MonoBehaviour {
 	public void RefreshGame()
 	{
 		panelController.gameTileText.SetActive(false);
-		SceneManager.LoadScene(0);
+//		SceneManager.LoadScene(0);
+		spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
+		spawner.StartClearScene();
+
 		GameManager.Instance.Score = 0;
 		GameManager.Instance.IsCameraMoved = true;
 //		cameraMove.isPlaying = true;
@@ -48,5 +53,7 @@ public class GameController : MonoBehaviour {
 		panelController.HideMainPanel();
 		panelController.HideScorePanel();
 		updateScore.ChangeLiveScore();
+
+
 	}
 }

@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour {
+
+	private PanelController panelcontroller;
 
 	private int CubeMatNum;
 	private int currentColor;
@@ -90,6 +93,7 @@ public class Spawner : MonoBehaviour {
 	void Awake()
 	{
 		spawnerTrans = GetComponent<Transform>();
+		panelcontroller = GameObject.FindWithTag("UI").GetComponent<PanelController>();
 	}
 
 	// Use this for initialization
@@ -955,6 +959,51 @@ public class Spawner : MonoBehaviour {
 			xPos++;
 			yield return 0;
 		}
+	}
+
+	public void StartClearScene()
+	{
+		StartCoroutine(ClearScene());
+	}
+
+	IEnumerator ClearScene()
+	{
+		for(int i = 0; i < cubeList.Count; i+= 2)
+		{
+			if(cubeList[i].activeInHierarchy)
+			{
+				cubeComponentList[i].StartMoveCube(30f);
+				cubeComponentList[i+ 1].StartMoveDown(30f);
+			}
+
+			yield return 0;
+		}
+
+		for(int i = 0; i < smallCubeList.Count; i+= 2)
+		{
+			if(smallCubeList[i].activeInHierarchy)
+			{
+				smallCubeComponentList[i].StartMoveCube(30f);
+				smallCubeComponentList[i+ 1].StartMoveDown(30f);
+			}
+
+			yield return 0;
+		}
+
+		for(int i = 0; i < tinyCubeList.Count; i+= 2)
+		{
+			if(tinyCubeList[i].activeInHierarchy)
+			{
+				tinyCubeComponentList[i].StartMoveCube(30f);
+				tinyCubeComponentList[i+ 1].StartMoveDown(30f);
+			}
+
+			yield return 0;
+		}
+
+
+		SceneManager.LoadScene(0);
+		panelcontroller.ShowX2DoubleButton();
 	}
 
 	private float YPosition()

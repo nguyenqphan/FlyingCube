@@ -1,0 +1,17 @@
+<linker>
+	<assembly fullname="Assembly-CSharp">
+		<type fullname="PanelController">
+			<method name="ShowShopPanel"/>
+			<method name="HideShopPanel"/>
+			<method name="HideNoAdsPanel"/>
+			<method name="ShowNoAdsPanel"/>
+		</type>
+		<type fullname="GameController">
+			<method name="StartGame"/>
+			<method name="RefreshGame"/>
+		</type>
+		<type fullname="UIController">
+			<method name="ForwardFast"/>
+		</type>
+	</assembly>
+</linker>
