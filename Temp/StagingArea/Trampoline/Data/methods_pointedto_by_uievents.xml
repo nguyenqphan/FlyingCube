@@ -2,9 +2,9 @@
 	<assembly fullname="Assembly-CSharp">
 		<type fullname="PanelController">
 			<method name="ShowShopPanel"/>
+			<method name="ShowNoAdsPanel"/>
 			<method name="HideShopPanel"/>
 			<method name="HideNoAdsPanel"/>
-			<method name="ShowNoAdsPanel"/>
 		</type>
 		<type fullname="GameController">
 			<method name="StartGame"/>

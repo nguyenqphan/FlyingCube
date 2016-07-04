@@ -970,11 +970,8 @@ public class Spawner : MonoBehaviour {
 	{
 		for(int i = 0; i < cubeList.Count; i+= 2)
 		{
-			if(cubeList[i].activeInHierarchy)
-			{
-				cubeComponentList[i].StartMoveCube(30f);
-				cubeComponentList[i+ 1].StartMoveDown(30f);
-			}
+			cubeComponentList[i].StartMoveCube(30f);
+			cubeComponentList[i+ 1].StartMoveDown(30f);
 
 			yield return 0;
 		}

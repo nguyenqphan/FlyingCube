@@ -71,6 +71,7 @@
      <Compile Include="Assets\__Scripts\Singleton.cs" />
      <Compile Include="Assets\__Scripts\SmallCubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Spawner.cs" />
+     <Compile Include="Assets\__Scripts\SwapImage.cs" />
      <Compile Include="Assets\__Scripts\UI.cs" />
      <Compile Include="Assets\__Scripts\UIController.cs" />
      <Compile Include="Assets\__Scripts\UpdateScore.cs" />

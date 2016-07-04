@@ -414,7 +414,7 @@ extern "C"  void CameraMove__ctor_m4028387493 (CameraMove_t4276106422 * __this, 
 {
 	{
 		__this->set_isPlaying_3((bool)1);
-		__this->set_speed_4((5.0f));
+		__this->set_speed_4((4.0f));
 		MonoBehaviour__ctor_m2022291967(__this, /*hidden argument*/NULL);
 		return;
 	}
