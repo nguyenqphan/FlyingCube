@@ -72,6 +72,7 @@
      <Compile Include="Assets\__Scripts\SmallCubeSkin.cs" />
      <Compile Include="Assets\__Scripts\Spawner.cs" />
      <Compile Include="Assets\__Scripts\UI.cs" />
+     <Compile Include="Assets\__Scripts\UIController.cs" />
      <Compile Include="Assets\__Scripts\UpdateScore.cs" />
      <None Include="Assets\PrimitivePlus\Documentation\ReadMe.txt" />
      <None Include="Assets\Gem\Shaders\Gem.shader" />

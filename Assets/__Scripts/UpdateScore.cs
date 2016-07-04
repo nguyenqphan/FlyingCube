@@ -20,11 +20,17 @@ public class UpdateScore : MonoBehaviour {
 
 	IEnumerator Score(){
 		while (isCountingScore) {
-			yield return new WaitForSeconds (1f); 
+			if (GameManager.Instance.IsDouble) {
+				yield return new WaitForSeconds (1f);
+			} 
+			else{
+				yield return new WaitForSeconds(3f);
+			}
 			if (isCountingScore == true) {										//this condition make sure no more score is added after the player dies
 				GameManager.Instance.Score++;
 			}
 			ChangeLiveScore();
+
 		}
 	}
 

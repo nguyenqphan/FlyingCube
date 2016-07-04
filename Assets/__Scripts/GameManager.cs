@@ -21,6 +21,7 @@ public class GameManager : Singleton<GameManager> {
 		set{numSpawnedCube = value;}
 	}
 
+
 	private int smallCubeColorNum = 0;
 
 	public int SmallCubeColorNum
@@ -38,6 +39,29 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 
+	private int numOfGame = 0;
+	public int NumOfGame{
+		get{return numOfGame;}
+		set{numOfGame = value;}
+	}
+
+//	private bool isWatched = true;
+//	public bool IsWatched{
+//		get{return isWatched;}
+//		set{isWatched = value;}
+//	}
+
+	private bool isDouble =false;
+	public bool IsDouble{
+		get{return isDouble;}
+		set{isDouble = value;}
+	}
+
+	private bool isSlowScore = false;
+	public bool IsSlowScore{
+		get{return isSlowScore;}
+		set{isSlowScore = value;}
+	}
 
 	private bool isStarted = false;
 

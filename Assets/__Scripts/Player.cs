@@ -21,13 +21,12 @@ public class Player : MonoBehaviour {
 		cameraMove = GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>();
 		panelController = GameObject.FindWithTag("UI").GetComponent<PanelController>();
 		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
-
 	}
 
 	void Start () {
-
 		playerRigid.useGravity = false;
-//		Debug.Log(spawner);
+		GameManager.Instance.IsSlowScore = false;
+//		Debug.Log("Start");
 	}
 	
 	// Update is called once per frame
@@ -54,9 +53,12 @@ public class Player : MonoBehaviour {
 				cameraMove.GoingForward();
 
 				updateScore.isCountingScore = true;
+
+				if(!GameManager.Instance.IsDouble)
+				{
+					GameManager.Instance.IsSlowScore = true;					
+				}
 				updateScore.IncreaseScore();
-
-
 			}
 		}
 	}
@@ -66,6 +68,10 @@ public class Player : MonoBehaviour {
 	{
 		if(other.CompareTag("Cube"))
 		{
+			GameManager.Instance.NumOfGame++;
+			GameManager.Instance.IsDouble = false;
+			GameManager.Instance.IsSlowScore = false;
+			panelController.ShowOrHideFastImage();
 			this.gameObject.SetActive(false);
 			spawner.PlayPlayerBreaking(playerTrans);
 			cameraMove.isPlaying = false; 						//stop the camera

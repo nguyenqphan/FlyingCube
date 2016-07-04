@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PanelController : MonoBehaviour {
 
-	public UpdateScore updateScore;
+	private UpdateScore updateScore;
 
 	public GameObject mainPanel;
 	public GameObject playButton;
@@ -16,10 +16,15 @@ public class PanelController : MonoBehaviour {
 	public GameObject shopPanel;
 	public GameObject noAdsPanel;
 	public GameObject gameTileText;
+	public GameObject x2ScoreButton;
+	public UIController uIscaling;
+	public GameObject fastImage;
 
 	void Awake()
 	{
 		updateScore = GameObject.Find("UI").GetComponent<UpdateScore>();
+		uIscaling = adsButton.GetComponent<UIController>();
+
 	}
 	// Use this for initialization
 	void Start () {
@@ -34,6 +39,9 @@ public class PanelController : MonoBehaviour {
 	public void HideMainPanel()
 	{
 		mainPanel.SetActive(false);
+		if (GameManager.Instance.AmountOfDiamond > 4) {
+			ShowX2DoubleButton ();
+		}
 	}
 
 	public void ShowMainPanel()
@@ -48,6 +56,15 @@ public class PanelController : MonoBehaviour {
 		}else{
 			playButton.SetActive(true);
 			refreshButton.SetActive(false);
+		}
+
+		if(GameManager.Instance.NumOfGame % 4 == 0)
+		{
+			adsButton.SetActive(true);
+			uIscaling.StartScalling();
+		}
+		else{
+			adsButton.SetActive(false);
 		}
 	}
 
@@ -87,5 +104,24 @@ public class PanelController : MonoBehaviour {
 		ShowMainPanel();
 		noAdsPanel.SetActive(false);
 	}
-		
+
+	public void ShowX2DoubleButton()
+	{
+		x2ScoreButton.SetActive(true);
+	}
+
+	public void HideX2DoubleButon()
+	{
+		x2ScoreButton.SetActive(false);
+	}
+
+
+	public void ShowOrHideFastImage()
+	{
+		if(GameManager.Instance.IsDouble){
+			fastImage.SetActive(true);
+		}else{
+			fastImage.SetActive(false);
+		}
+	}
 }

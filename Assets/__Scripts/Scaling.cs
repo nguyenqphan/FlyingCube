@@ -18,11 +18,14 @@ public class Scaling : MonoBehaviour {
 		trans = GetComponent<Transform>();
 	}
 	void Start () {
-		scale = 0.3f;
-		scalingSpeed = 1f;
-		isBigger = true;
-		StartCoroutine(pulse());
+		
+			scale = 0.3f;
+			scalingSpeed = 1f;
+			isBigger = true;
+	
+			StartCoroutine (pulse ());
 	}
+		
 	
 	private IEnumerator pulse()
 	{
