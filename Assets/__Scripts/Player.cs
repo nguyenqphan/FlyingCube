@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 	private CameraMove cameraMove;
 	private PanelController panelController;
 	private UpdateScore updateScore;
-
+	private SoundManager soundManager;
 	private bool tap;
 	// Use this for initialization
 
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 		cameraMove = GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>();
 		panelController = GameObject.FindWithTag("UI").GetComponent<PanelController>();
 		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
+		soundManager = GameObject.FindWithTag("GameManager").GetComponent<SoundManager>();
 	}
 
 	void Start () {
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour {
 		
 		if(tap)
 		{
+			soundManager.PlayTapClip();
 			playerRigid.useGravity = true;
 			Flap();
 			tap = false;
@@ -73,6 +75,8 @@ public class Player : MonoBehaviour {
 			GameManager.Instance.IsSlowScore = false;
 			panelController.ShowOrHideFastImage();
 			this.gameObject.SetActive(false);
+			soundManager.PlayPlayerDieClip();
+
 			spawner.PlayPlayerBreaking(playerTrans);
 			cameraMove.isPlaying = false; 						//stop the camera
 

@@ -51,6 +51,12 @@ public class GameManager : Singleton<GameManager> {
 //		set{isWatched = value;}
 //	}
 
+	private bool isEffectOn = true;
+	public bool IsEffectON{
+		get{return isEffectOn;}
+		set{isEffectOn = value;}
+	}
+
 	private bool isDouble =false;
 	public bool IsDouble{
 		get{return isDouble;}
