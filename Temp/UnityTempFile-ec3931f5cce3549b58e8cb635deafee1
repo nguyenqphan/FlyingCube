@@ -104,6 +104,7 @@
 'Assets/__Scripts/Shop.cs'
 'Assets/__Scripts/Singleton.cs'
 'Assets/__Scripts/SmallCubeSkin.cs'
+'Assets/__Scripts/SoundEFButton.cs'
 'Assets/__Scripts/SoundManager.cs'
 'Assets/__Scripts/Spawner.cs'
 'Assets/__Scripts/SwapImage.cs'

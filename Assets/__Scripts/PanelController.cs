@@ -4,6 +4,7 @@ using System.Collections;
 public class PanelController : MonoBehaviour {
 
 	private UpdateScore updateScore;
+	private SoundManager soundManager;
 
 	public GameObject mainPanel;
 	public GameObject playButton;
@@ -20,10 +21,12 @@ public class PanelController : MonoBehaviour {
 	public UIController uIscaling;
 	public GameObject fastImage;
 
+
 	void Awake()
 	{
-		updateScore = GameObject.Find("UI").GetComponent<UpdateScore>();
+		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
 		uIscaling = adsButton.GetComponent<UIController>();
+		soundManager = GameObject.FindWithTag("GameManager").GetComponent<SoundManager>();
 
 	}
 	// Use this for initialization
@@ -70,12 +73,14 @@ public class PanelController : MonoBehaviour {
 
 	public void ShowShopPanel()
 	{
+		soundManager.PlayButtonClickClip();
 		HideMainPanel();
 		shopPanel.SetActive(true);
 	}
 
 	public void HideShopPanel()
 	{
+		soundManager.PlayButtonClickClip();
 		shopPanel.SetActive(false);
 		ShowMainPanel();
 	}
@@ -95,12 +100,14 @@ public class PanelController : MonoBehaviour {
 
 	public void ShowNoAdsPanel()
 	{
+		soundManager.PlayButtonClickClip();
 		HideMainPanel();
 		noAdsPanel.SetActive(true);
 	}
 
 	public void HideNoAdsPanel()
 	{
+		soundManager.PlayButtonClickClip();
 		ShowMainPanel();
 		noAdsPanel.SetActive(false);
 	}

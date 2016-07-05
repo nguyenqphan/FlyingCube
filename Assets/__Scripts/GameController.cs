@@ -8,11 +8,13 @@ public class GameController : MonoBehaviour {
 	private CameraMove cameraMove;
 	private UpdateScore updateScore;
 	private Spawner spawner;
+	private SoundManager soundManager;
 	void Awake()
 	{
 		panelController = GetComponent<PanelController>();
 		cameraMove = GameObject.FindWithTag("MainCamera").GetComponent<CameraMove>();
 		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
+		soundManager = GameObject.FindWithTag("GameManager").GetComponent<SoundManager>();;
 
 
 	}
@@ -28,7 +30,9 @@ public class GameController : MonoBehaviour {
 
 	public void StartGame()
 	{
+		soundManager.PlayButtonClickClip();
 		panelController.gameTileText.SetActive(false);
+		panelController.ShowX2DoubleButton();
 		GameManager.Instance.IsCameraMoved = true;
 		GameManager.Instance.IsStartButtonPressed = true;
 		GameManager.Instance.IsStarted = true;
@@ -39,6 +43,7 @@ public class GameController : MonoBehaviour {
 
 	public void RefreshGame()
 	{
+		soundManager.PlayButtonClickClip();
 		panelController.gameTileText.SetActive(false);
 //		SceneManager.LoadScene(0);
 		spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();

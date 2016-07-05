@@ -24,6 +24,9 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip awardClip;
 	private AudioSource awardSource;
 
+	public AudioClip x2ScoreClip;
+	private AudioSource x2ScoreSource;
+
 	void Awake()
 	{
 		mainMusicSource = GetComponent<AudioSource>();
@@ -32,6 +35,7 @@ public class SoundManager : MonoBehaviour {
 		playerDieSource = GetComponent<AudioSource>();
 		buttonClickSource = GetComponent<AudioSource>();
 		awardSource = GetComponent<AudioSource>();
+		x2ScoreSource = GetComponent<AudioSource>();
 
 	}
 
@@ -65,7 +69,7 @@ public class SoundManager : MonoBehaviour {
 
 	public void PlayPickUpClip()
 	{
-		pickUpSource.PlayOneShot(pickUpClip, GameManager.Instance.IsEffectON? 1f : 0f);
+		pickUpSource.PlayOneShot(pickUpClip, GameManager.Instance.IsEffectON? .5f : 0f);
 	}
 
 	public void PlayTapClip()
@@ -87,4 +91,10 @@ public class SoundManager : MonoBehaviour {
 	{
 		awardSource.PlayOneShot(awardClip, GameManager.Instance.IsEffectON? 1f : 0f);
 	}
+
+	public void PlayX2ScoreClip()
+	{
+		x2ScoreSource.PlayOneShot(x2ScoreClip, GameManager.Instance.IsEffectON? 1f: 0f);
+	}
+
 }

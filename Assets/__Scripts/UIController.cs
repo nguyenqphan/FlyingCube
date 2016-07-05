@@ -4,6 +4,7 @@ using System.Collections;
 public class UIController : MonoBehaviour {
 
 	private Transform trans;
+	private SoundManager soundManager;
 
 	private bool isClicked = false;
 	private float startScale;
@@ -29,6 +30,7 @@ public class UIController : MonoBehaviour {
 		trans = GetComponent<Transform>();
 		panelController = GameObject.FindWithTag("UI").GetComponent<PanelController>();
 		updateScore = GameObject.FindWithTag("UI").GetComponent<UpdateScore>();
+		soundManager = GameObject.FindWithTag("GameManager").GetComponent<SoundManager>();
 	}
 	void Start () {
 		scale = 0.1f;
@@ -82,6 +84,7 @@ public class UIController : MonoBehaviour {
 //		Debug.Log("Im in FarwardFast");
 //		StopAllCoroutines();
 		if (!isClicked) {
+			soundManager.PlayX2ScoreClip();
 			isClicked = true;
 			GameManager.Instance.IsDouble = true;
 			GameManager.Instance.AmountOfDiamond -= 5;
