@@ -106,7 +106,8 @@ public class Spawner : MonoBehaviour {
 
 		wideSize = 3;
 
-		shapeValue = Random.Range(0,16);
+//		shapeValue = Random.Range(0,16);
+		shapeValue = 6;
 		countShape = shapeValue;
 
 		cubeList = new List<GameObject>();
@@ -440,13 +441,14 @@ public class Spawner : MonoBehaviour {
 		case 9: return Spike();
 		case 10: return VShape2();
 		case 11: return BlockShape();
-		case 12: return VReverseShape2();
+		case 12: return VSpike();
 		case 13: return BlockShape();
 		case 14: return VReverseShape3();
 		case 15: return Spike();
 		case 16: return VShape3();	
 		case 17: return BlockShape2();
-		case 18: return MidLineShape();				//Deadly Shape
+		case 18: return VSpike();
+		case 19: return MidLineShape();				//Deadly Shape
 		default: return EmptyShape();
 		}
 	}
@@ -471,7 +473,7 @@ public class Spawner : MonoBehaviour {
 
 //				Debug.Log(shapeValue + "  "  + countShape);
 
-				if(shapeValue == 17)
+				if(shapeValue == 18)
 				{
 					isStraight = !isStraight;
 					if(!isOneRound){
@@ -480,7 +482,7 @@ public class Spawner : MonoBehaviour {
 						isOneRound = !isOneRound;
 					}
 				}
-				if(shapeValue > 18){
+				if(shapeValue > 19){
 					countShape = 1;
 					shapeValue = 1;
 				}
@@ -546,7 +548,6 @@ public class Spawner : MonoBehaviour {
 		return unit;
 	}
 
-	private int flatUnit = 0; 
 	private float VReverseShape2(){
 		isEmptyShape = false;
 		isBlockShape = true;
@@ -600,6 +601,86 @@ public class Spawner : MonoBehaviour {
 			}
 		}
 		return unit;
+	}
+		
+	private int pauseUnit = 2;
+	private int flatUnit = 0; 
+	private float VSpike(){
+		isEmptyShape = false;
+		isBlockShape = true;
+		isMoveDown = false;
+		isZigzag = true;
+		if (isFirst) {
+			if (switchPlusMinus) {
+				unit = unit + 1f;
+				if(unit == pauseUnit)
+				{	
+					if(flatUnit < 8)
+					{
+						unit--;
+						flatUnit++;
+
+					}
+					else{
+						flatUnit = 0;
+						pauseUnit++;
+					}
+					flatUnit++;
+//					return unit;
+				}
+
+				if (unit > 5f) {
+					Debug.Log(unit);
+					switchPlusMinus = !switchPlusMinus;
+					pauseUnit = 5;
+				}
+			} else {
+				unit = unit - 1f;
+				if(unit == pauseUnit)
+				{	
+					if(flatUnit < 8)
+					{
+						unit++;
+						flatUnit++;
+
+					}
+					else{
+						flatUnit = 0;
+						pauseUnit--;
+					}
+					flatUnit++;
+//					return unit;
+				}
+				if (unit  == 0) {
+					switchPlusMinus = !switchPlusMinus;
+
+				}
+			}
+		}else{
+			if (unit == 0) {
+				shapeValue =0;								//change the shape, exit this function
+			}
+		}
+
+
+		if(isFirst ){
+			isSpike = !isSpike;
+			if(isSpike){
+				return unit;
+			}else{
+				return unit + Random.Range(1,3);
+			}
+
+		}else
+		{
+			if(isSpike){
+				return unit;
+			}else{
+				return unit - Random.Range(2, 5);
+			}
+		}
+
+
 	}
 
 	private float VReverseShape3(){
@@ -905,7 +986,7 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
-	private bool isStraight = true;
+	private bool isStraight = false;
 	private float StraigtLine()
 	{
 		return 2f;	
@@ -980,8 +1061,8 @@ public class Spawner : MonoBehaviour {
 		{
 			if(smallCubeList[i].activeInHierarchy)
 			{
-				smallCubeComponentList[i].StartMoveCube(30f);
-				smallCubeComponentList[i+ 1].StartMoveDown(30f);
+				smallCubeComponentList[i].StartMoveCube(60f);
+				smallCubeComponentList[i+ 1].StartMoveDown(60f);
 			}
 
 			yield return 0;
