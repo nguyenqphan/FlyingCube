@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{FBF171E0-6E53-B91F-FFE5-F5FB1CF76701}") = "FlyingCube copy", "Assembly-CSharp.csproj", "{005B95ED-4F28-865F-4456-DB54965BBD27}"
+EndProject
+Project("{FBF171E0-6E53-B91F-FFE5-F5FB1CF76701}") = "FlyingCube copy", "Assembly-CSharp-Editor.csproj", "{939E5986-212F-368F-7C27-63211FAA8569}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{005B95ED-4F28-865F-4456-DB54965BBD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{005B95ED-4F28-865F-4456-DB54965BBD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{005B95ED-4F28-865F-4456-DB54965BBD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{005B95ED-4F28-865F-4456-DB54965BBD27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939E5986-212F-368F-7C27-63211FAA8569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939E5986-212F-368F-7C27-63211FAA8569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939E5986-212F-368F-7C27-63211FAA8569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939E5986-212F-368F-7C27-63211FAA8569}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
