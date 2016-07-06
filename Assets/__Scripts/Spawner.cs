@@ -1225,8 +1225,8 @@ public class Spawner : MonoBehaviour {
 	{
 		for(int i = 0; i < cubeList.Count; i+= 2)
 		{
-			cubeComponentList[i].StartMoveCube(30f);
-			cubeComponentList[i+ 1].StartMoveDown(30f);
+			cubeComponentList[i].StartMoveCube(60f);
+			cubeComponentList[i+ 1].StartMoveDown(60f);
 
 			yield return 0;
 		}
@@ -1235,8 +1235,8 @@ public class Spawner : MonoBehaviour {
 		{
 			if(smallCubeList[i].activeInHierarchy)
 			{
-				smallCubeComponentList[i].StartMoveCube(60f);
-				smallCubeComponentList[i+ 1].StartMoveDown(60f);
+				smallCubeComponentList[i].StartMoveCube(30f);
+				smallCubeComponentList[i+ 1].StartMoveDown(30f);
 			}
 
 			yield return 0;

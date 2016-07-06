@@ -31,6 +31,7 @@ public class Cube : MonoBehaviour {
 
 	public void StartMoveCube(float distance)
 	{
+		StopAllCoroutines();
 		StartCoroutine(MoveCube(distance));
 	}
 
@@ -93,6 +94,7 @@ public class Cube : MonoBehaviour {
 
 	public void StartMoveDown(float distance)
 	{
+		StopAllCoroutines();
 		StartCoroutine(MoveDown(distance));
 	}
 
