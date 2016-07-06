@@ -5,7 +5,7 @@ using System.IO;
 
 public class GameManager : Singleton<GameManager> {
 
-	private string curPlayerName = "defPlayer";
+	private string curPlayerName = "soccer";
 
 	public string CurPlayerName
 	{

@@ -43,7 +43,7 @@ public class Shop : MonoBehaviour {
 		GameManager.Instance.CurPlayerAvailSC = 0;
 		GameManager.Instance.CurPlayerIndex = 0;
 
-		GameManager.Instance.CurPlayerName = "defPlayer";
+//		GameManager.Instance.CurPlayerName = "";
 
 //
 		GameManager.Instance.AmountOfDiamond = 1000;

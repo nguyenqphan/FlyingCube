@@ -106,7 +106,7 @@ public class Spawner : MonoBehaviour {
 
 		wideSize = 3;
 
-		shapeValue = Random.Range(0,16);
+		shapeValue = Random.Range(0,29);
 //		shapeValue = 1;
 		countShape = shapeValue;
 
@@ -663,7 +663,7 @@ public class Spawner : MonoBehaviour {
 				}
 
 				if (unit > 5f) {
-					Debug.Log(unit);
+
 					switchPlusMinus = !switchPlusMinus;
 					pauseUnit = 5;
 				}
